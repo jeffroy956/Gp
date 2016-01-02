@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="3795a854-fb9f-43b8-9f90-eb1566a70b02" ChangeDateTime="12/30/2015 13:58:10">
+    <Property Name="ElementName" Value="[dbo].[tlkpFamilies].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[tlkpFamilies]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FamilyID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="3304b7d4-ec85-4bbf-9f94-6718472dd7d7" ChangeDateTime="12/30/2015 14:00:03">
+    <Property Name="ElementName" Value="[dbo].[tblFamilies].[FamilyName]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[tblFamilies]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FamilyNameName" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="7fa310a2-9f2e-4a24-9bc6-3f25ed7a62c1" ChangeDateTime="12/30/2015 14:00:06">
+    <Property Name="ElementName" Value="[dbo].[tblFamilies].[FamilyNameName]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[tblFamilies]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Name" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="30323039-ddab-443b-991f-1cb2dc09e15d" ChangeDateTime="12/30/2015 14:42:27">
+    <Property Name="ElementName" Value="[dbo].[tblCompanions].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[tblCompanions]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CompanionId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="9353541f-31b9-4ca3-a56f-4c77148b5de6" ChangeDateTime="01/02/2016 13:11:21">
+    <Property Name="ElementName" Value="[dbo].[tblCompanions].[CompanionFamilyId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[tblCompanions]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="RelatedFamilyId" />
+  </Operation>
+</Operations>
