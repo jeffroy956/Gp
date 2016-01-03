@@ -5,6 +5,7 @@ using Gp.Data.sql;
 using Gp.Data.entities;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Collections.Generic;
 
 namespace Gp.Tests.Integrated
 {
@@ -56,6 +57,23 @@ namespace Gp.Tests.Integrated
             Family getFamily = familyRepo.Get(newFamily.FamilyId.Value);
 
             Assert.AreEqual("yo!", getFamily.Name);
+        }
+
+        [TestMethod]
+        public void GetCachesFamily()
+        {
+            FamilyRepository familyRepo = new FamilyRepository(_unitOfWork);
+
+            Family newFamily = new Family()
+            {
+                Name = "yo!"
+            };
+
+            familyRepo.Insert(newFamily);
+
+            Family getFamily = familyRepo.Get(newFamily.FamilyId.Value);
+
+            Assert.IsTrue(object.ReferenceEquals(getFamily, familyRepo.Get(newFamily.FamilyId.Value)));
         }
 
         [TestMethod]
@@ -180,6 +198,54 @@ namespace Gp.Tests.Integrated
 
             Assert.AreEqual(1, savedBeets.Enemies.Count);
             Assert.AreEqual("corn", savedBeets.Enemies[0].Name);
+        }
+
+        [TestMethod]
+        public void GetAllFamilies()
+        {
+            FamilyRepository familyRepo = new FamilyRepository(_unitOfWork);
+
+            List<Family> allFamilies = familyRepo.GetAll();
+
+            Assert.IsTrue(allFamilies.Count > 0);
+        }
+
+        [TestMethod]
+        public void GetAllFamiliesWithRelations()
+        {
+            FamilyRepository familyRepo = new FamilyRepository(_unitOfWork);
+
+            Family corn = new Family()
+            {
+                Name = "corn"
+            };
+
+            familyRepo.Insert(corn);
+
+            Family wheat = new Family()
+            {
+                Name = "wheat"
+            };
+
+            familyRepo.Insert(wheat);
+
+            Family beets = new Family()
+            {
+                Name = "beets test"
+            };
+
+            beets.Enemies.Add(corn);
+            beets.Companions.Add(wheat);
+
+            familyRepo.Insert(beets);
+
+            List<Family> allFamilies = familyRepo.GetAll();
+
+            Family loadedBeets = allFamilies.Single(af => af.Name == "beets test");
+            Assert.AreEqual(1, loadedBeets.Enemies.Count, "Enemies.Count");
+            Assert.AreEqual("corn", loadedBeets.Enemies[0].Name);
+            Assert.AreEqual(1, loadedBeets.Companions.Count, "Companions.Count");
+            Assert.AreEqual("wheat", loadedBeets.Companions[0].Name);
         }
     }
 }

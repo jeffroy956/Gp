@@ -121,27 +121,63 @@ namespace Gp.Data.sql
 
             return family;
         }
-
         private void GetFamilyRelations(int familyId, List<Family> relations, string relationTableName)
         {
-            SqlCommand companionCmd = _unitOfWork.CreateCommand();
-            companionCmd.CommandType = System.Data.CommandType.Text;
-            companionCmd.CommandText = "Select RelatedFamilyId From dbo." + relationTableName + " Where FamilyId = @FamilyId";
-            companionCmd.Parameters.AddWithValue("@FamilyId", familyId);
+            List<FamilyRelation> relatedFamilies = GetRelationsFromDataStore(familyId, relationTableName);
 
-            List<int> relatedFamilies = new List<int>();
-            using (SqlDataReader r = companionCmd.ExecuteReader())
+            foreach (FamilyRelation relatedFamily in relatedFamilies)
+            {
+                relations.Add(GetFamilyInternal(relatedFamily.RelatedFamilyId));
+            }
+        }
+
+        public List<Family> GetAll()
+        {
+            List<Family> rtnFamilies = GetFamiliesFromDataStore(null);
+            List<FamilyRelation> allCompanions = GetRelationsFromDataStore(null, "tblCompanions");
+            List<FamilyRelation> allEnemies = GetRelationsFromDataStore(null, "tblEnemies");
+
+            foreach(Family family in rtnFamilies)
+            {
+                foreach(FamilyRelation companion in allCompanions
+                    .Where(ac => ac.FamilyId == family.FamilyId))
+                {
+                    family.Companions.Add(GetFamilyInternal(companion.RelatedFamilyId));
+                }
+
+                foreach (FamilyRelation enemy in allEnemies
+                    .Where(ac => ac.FamilyId == family.FamilyId))
+                {
+                    family.Enemies.Add(GetFamilyInternal(enemy.RelatedFamilyId));
+                }
+            }
+
+            return rtnFamilies;
+        }
+        private List<FamilyRelation> GetRelationsFromDataStore(int? familyId, string relationTableName)
+        {
+            SqlCommand relationCmd = _unitOfWork.CreateCommand();
+            relationCmd.CommandType = System.Data.CommandType.Text;
+            relationCmd.CommandText = "Select FamilyId, RelatedFamilyId From dbo." + relationTableName;
+            if (familyId != null)
+            {
+                relationCmd.CommandText = relationCmd.CommandText + " Where FamilyId = @FamilyId";
+                relationCmd.Parameters.AddWithValue("@FamilyId", familyId);
+            }
+
+            List<FamilyRelation> relatedFamilies = new List<FamilyRelation>();
+            using (SqlDataReader r = relationCmd.ExecuteReader())
             {
                 while (r.Read())
                 {
-                    relatedFamilies.Add(r.GetInt32(0));
+                    relatedFamilies.Add(new FamilyRelation()
+                    {
+                        FamilyId = r.GetInt32(0),
+                        RelatedFamilyId = r.GetInt32(1)
+                    });
                 }
             };
-
-            foreach (int relatedFamilyId in relatedFamilies)
-            {
-                relations.Add(GetFamilyInternal(relatedFamilyId));
-            }
+            return relatedFamilies;
         }
 
         private Dictionary<int, Family> _familyCache = new Dictionary<int, Family>();
@@ -152,29 +188,47 @@ namespace Gp.Data.sql
 
             if (!_familyCache.TryGetValue(familyId, out family))
             {
-                SqlCommand familyCmd = _unitOfWork.CreateCommand();
-                familyCmd.CommandType = System.Data.CommandType.Text;
-                familyCmd.CommandText = "Select FamilyId, Name From dbo.tblFamilies Where FamilyId = @FamilyId";
-                familyCmd.Parameters.AddWithValue("@FamilyId", familyId);
-
-                using (SqlDataReader r = familyCmd.ExecuteReader())
+                List<Family> foundFamilies = GetFamiliesFromDataStore(familyId);
+                if (foundFamilies.Count == 1)
                 {
-                    if (r.Read())
-                    {
-                        family = new Family()
-                        {
-                            FamilyId = r.GetInt32(r.GetOrdinal("FamilyId")),
-                            Name = r.GetString(r.GetOrdinal("Name"))
-                        };
-
-                        _familyCache.Add(familyId, family);
-                    }
+                    family = foundFamilies[0];
                 }
-
-
             }
 
             return family;
+        }
+
+        private List<Family> GetFamiliesFromDataStore(int? familyId)
+        {
+            List<Family> foundFamilies = new List<Family>();
+
+            SqlCommand familyCmd = _unitOfWork.CreateCommand();
+            familyCmd.CommandType = System.Data.CommandType.Text;
+            familyCmd.CommandText = "Select FamilyId, Name From dbo.tblFamilies";
+            if (familyId != null)
+            {
+                familyCmd.CommandText = familyCmd.CommandText + " Where FamilyId = @FamilyId";
+                familyCmd.Parameters.AddWithValue("@FamilyId", familyId);
+            }
+
+            using (SqlDataReader r = familyCmd.ExecuteReader())
+            {
+                int idxFamilyId = r.GetOrdinal("FamilyId");
+                int idxName = r.GetOrdinal("Name");
+                while (r.Read())
+                {
+                    Family loadedFamily = new Family()
+                    {
+                        FamilyId = r.GetInt32(idxFamilyId),
+                        Name = r.GetString(idxName)
+                    };
+                    foundFamilies.Add(loadedFamily);
+
+                   _familyCache[loadedFamily.FamilyId.Value] = loadedFamily;
+                }
+            }
+
+            return foundFamilies;
         }
     }
 }
