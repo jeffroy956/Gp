@@ -61,11 +61,11 @@
     <Compile Include="sql\SqlUnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="common\" />
+    <Folder Include="dto\" />
     <Folder Include="ef\" />
     <Folder Include="mongo\" />
   </ItemGroup>
