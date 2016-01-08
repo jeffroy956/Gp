@@ -1,18 +1,30 @@
 ﻿/// <reference path="_references.js" />
 (function (gp, $) {
     function ServerRequest() {
-        function get(url) {
-            return sendRequest("GET", url);
+        function get(url, data) {
+            return sendRequest("GET", url, data);
         }
 
-        function sendRequest(method, url) {
+        function post(url, data) {
+            return sendRequest("POST", url, data);
+        }
+
+        function sendRequest(verb, url, data) {
             var promise = new Promise(function (resolve, reject) {
 
                 $.ajax({
-                    type: method,
+                    type: verb,
                     url: url,
+                    data: data,
                     success: function (data) {
                         resolve(data);
+                    },
+                    error: function (xhr, errorType, error) {
+                        reject({
+                            xhr: xhr,
+                            errorType: errorType,
+                            error: error
+                        });
                     }
                 });
 
@@ -22,7 +34,9 @@
         }
 
         var publicApi = {
-            get: get
+            get: get,
+            post: post,
+            sendRequest: sendRequest
         }
 
         return publicApi;
