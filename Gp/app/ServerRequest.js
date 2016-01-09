@@ -1,5 +1,7 @@
 ﻿/// <reference path="_references.js" />
 (function (gp, $) {
+    "use strict";
+
     function ServerRequest() {
         function get(url, data) {
             return sendRequest("GET", url, data);
@@ -37,7 +39,7 @@
             get: get,
             post: post,
             sendRequest: sendRequest
-        }
+        };
 
         return publicApi;
     }
