@@ -9,9 +9,9 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace GpAngular.Controllers
+namespace Gp.Controllers
 {
-    public class FamilyController : ApiController
+    public class FamiliesController : ApiController
     {
         // GET api/<controller>
         public IEnumerable<Family> Get()

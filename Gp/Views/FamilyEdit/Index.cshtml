@@ -4,14 +4,33 @@
 <h2>
     The family edit page
 </h2>
-<div class="families__content">
-    <ul class="families__list">
-        <li class="families__item">
-            <h3></h3>
-        </li>
-    </ul>
+<div class="family-edit__container">
+    <table>
+        <tr>
+            <td class="family-edit__list-pane">
+                <ul class="family-list" data-bind="foreach: families">
+                    <li class="family-list__item">
+                        <h3 class="family-list__item-name" data-bind="text: name"></h3>
+                    </li>
+                </ul>
+            </td>
+            <td class="family-edit__edit-pane">
+                Edit pane
+            </td>
+        </tr>
+    </table>
+
 </div>
 @section Scripts{
     <script src="~/Scripts/knockout-3.4.0.js"></script>
     <script src="~/Scripts/zepto.js"></script>
+    <script src="~/app/ServerRequest.js"></script>
+    <script src="~/app/FamilyRepository.js"></script>
+    <script src="~/app/FamilyViewModel.js"></script>
+    <script>
+        var request = new gp.ServerRequest();
+
+        var vm = new gp.FamilyViewModel(new gp.FamilyRepository(request));
+        ko.applyBindings(vm);
+    </script>
 }

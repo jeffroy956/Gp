@@ -7,10 +7,8 @@ using System.Web.Routing;
 using System.Web.Security;
 using System.Web.SessionState;
 using System.Web.Http;
-using GpAngular.App_Start;
-using System.Web.Optimization;
 
-namespace GpAngular
+namespace Gp
 {
     public class Global : HttpApplication
     {
@@ -20,7 +18,6 @@ namespace GpAngular
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
     }
 }
