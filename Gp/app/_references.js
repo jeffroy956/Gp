@@ -2,3 +2,4 @@
 /// <reference path="C:\git\Gp\Gp\Scripts/zepto-debug.js" />
 /// <reference path="ServerRequest.js" />
 /// <reference path="FamilyRepository.js" />
+/// <reference path="FamilyViewModel.js" />

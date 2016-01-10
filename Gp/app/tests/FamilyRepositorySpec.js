@@ -7,7 +7,7 @@ describe("FamilyRepository", function () {
 
     it("gets all families", function () {
         var request = new gp.ServerRequest();
-        spyOn(request, "sendRequest");
+        spyOn(request, "sendRequest").and.returnValue(test.a.promiseStub());
 
         var repo = new gp.FamilyRepository(request);
 
@@ -19,7 +19,7 @@ describe("FamilyRepository", function () {
 
     it("gets all families returns promise", function () {
         var request = new gp.ServerRequest();
-        spyOn(request, "sendRequest");
+        spyOn(request, "sendRequest").and.returnValue(test.a.promiseStub());
 
         var repo = new gp.FamilyRepository(request);
 
@@ -35,14 +35,6 @@ describe("FamilyRepository", function () {
         var families = test.a.familyBuilder().withFamily({
             familyId: 1,
             name: "lettuce",
-            //companions: {
-            //    familyId: 2,
-            //    name: "beans"
-            //},
-            //enemies: {
-            //    familyId: 3,
-            //    name: "carrots"
-            //}
         }).build();
 
 
