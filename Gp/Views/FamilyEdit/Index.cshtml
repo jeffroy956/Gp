@@ -10,20 +10,35 @@
             <td class="family-edit__list-pane">
                 <ul class="family-list" data-bind="foreach: families">
                     <li class="family-list__item">
-                        <h3 class="family-list__item-name" data-bind="text: name"></h3>
+                        <h3 class="family-list__item-name" data-bind="text: name, click: $parent.selectFamily"></h3>
                     </li>
                 </ul>
             </td>
             <td class="family-edit__edit-pane">
-                Edit pane
+                <table data-bind="with: selectedFamily">
+                    <tr>
+                        <td>
+                            <div>Family Name</div>
+                            <div>
+                                <input data-bind="value: name" />
+                            </div>
+                        </td>
+                        <td>
+                            <div>Companions</div>
+                            
+                        </td>
+                        <td>
+                            <div>Enemies</div>
+
+                        </td>
+                    </tr>
+                </table>
             </td>
         </tr>
     </table>
 
 </div>
 @section Scripts{
-    <script src="~/Scripts/knockout-3.4.0.js"></script>
-    <script src="~/Scripts/zepto.js"></script>
     <script src="~/app/ServerRequest.js"></script>
     <script src="~/app/FamilyRepository.js"></script>
     <script src="~/app/FamilyViewModel.js"></script>

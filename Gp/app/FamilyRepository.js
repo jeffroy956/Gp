@@ -22,7 +22,9 @@
             serverData.forEach(function (family) {
                 rtnFamilies.push({
                     familyId: family.familyId,
-                    name: ko.observable(family.name)
+                    name: ko.observable(family.name),
+                    companions: ko.observable(family.companions),
+                    enemies: ko.observable(family.enemies)
                 });
             });
 

@@ -2,13 +2,19 @@
 .family-list{
     list-style: none;
     padding: 0;
-    max-height: 300px;
+    margin: 0;
+    max-height: 500px;
     overflow: auto;
 }
 .family-list__item-name {
     margin: 0;
+    padding: @doubleStandardPadding;
+    border: 1px solid @defaultBorderColor;
+    cursor: pointer;
 }
 
 .family-edit__edit-pane {
     vertical-align: top;
+    padding: @doubleStandardPadding;
+    border: 1px solid @defaultBorderColor;
 }

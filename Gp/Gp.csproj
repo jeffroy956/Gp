@@ -122,6 +122,8 @@
     <Content Include="app\tests\FamilyRepositorySpec.js" />
     <Content Include="app\tests\ServerRequestSpec.js" />
     <Content Include="app\tests\SpecRunner.html" />
+    <Content Include="bower_components\lodash\dist\lodash.js" />
+    <Content Include="bower_components\lodash\dist\lodash.min.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="gruntfile.js" />
@@ -172,6 +174,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="node_modules\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Gp.Data\Gp.Data.csproj">
