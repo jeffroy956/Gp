@@ -75,7 +75,7 @@ describe("FamilyViewModel", function () {
         });
     });
 
-    it("availableCompanions for family does not contain already selected family", function (done) {
+    it("availableCompanions for family does not contain already selected companions", function (done) {
         var repo = new gp.FamilyRepository();
         var repoPromise = test.a.promiseFake();
 
@@ -118,6 +118,103 @@ describe("FamilyViewModel", function () {
 
             expect(vm.availableCompanions).toBeDefined();
             expect(ko.unwrap(vm.availableCompanions()[0].name)).toBe("carrot");
+            done();
+        });
+
+    });
+
+    it("availableCompanions for family does not contain already selected enemies", function (done) {
+        var repo = new gp.FamilyRepository();
+        var repoPromise = test.a.promiseFake();
+
+        spyOn(repo, "getAll").and.returnValue(repoPromise.promise);
+
+        var vm = new gp.FamilyViewModel(repo);
+
+        repoPromise.resolve(
+            [
+                {
+                    familyId: 1,
+                    name: ko.observable("beans"),
+                    companions: ko.observableArray(),
+                    enemies: ko.observableArray([
+                        {
+                            familyId: 2,
+                            name: "spinach"
+                        }
+                    ])
+                },
+                {
+                    familyId: 2,
+                    name: ko.observable("spinach"),
+                    companions: ko.observableArray(),
+                    enemies: ko.observableArray()
+                },
+                {
+                    familyId: 3,
+                    name: ko.observable("carrot"),
+                    companions: ko.observableArray(),
+                    enemies: ko.observableArray()
+                },
+            ]);
+
+
+        repoPromise.waitFor(function () {
+            return vm.families().length > 0;
+        }, function () {
+            vm.selectFamily(vm.families()[0]);
+
+            expect(vm.availableCompanions).toBeDefined();
+            expect(ko.unwrap(vm.availableCompanions()[0].name)).toBe("carrot");
+            done();
+        });
+
+    });
+
+
+    it("populate availableEnemies", function (done) {
+        var repo = new gp.FamilyRepository();
+        var repoPromise = test.a.promiseFake();
+
+        spyOn(repo, "getAll").and.returnValue(repoPromise.promise);
+
+        var vm = new gp.FamilyViewModel(repo);
+
+        repoPromise.resolve(
+            [
+                {
+                    familyId: 1,
+                    name: ko.observable("beans"),
+                    companions: ko.observableArray(),
+                    enemies: ko.observableArray([
+                        {
+                            familyId: 2,
+                            name: "spinach"
+                        }
+                    ])
+                },
+                {
+                    familyId: 2,
+                    name: ko.observable("spinach"),
+                    companions: ko.observableArray(),
+                    enemies: ko.observableArray()
+                },
+                {
+                    familyId: 3,
+                    name: ko.observable("carrot"),
+                    companions: ko.observableArray(),
+                    enemies: ko.observableArray()
+                },
+            ]);
+
+
+        repoPromise.waitFor(function () {
+            return vm.families().length > 0;
+        }, function () {
+            vm.selectFamily(vm.families()[0]);
+
+            expect(vm.availableEnemies).toBeDefined();
+            expect(ko.unwrap(vm.availableEnemies()[0].name)).toBe("carrot");
             done();
         });
 
