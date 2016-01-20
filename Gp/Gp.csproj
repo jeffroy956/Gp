@@ -118,6 +118,7 @@
     <Content Include="app\tests\builders\a.js" />
     <Content Include="app\tests\builders\FamilyBuilder.js" />
     <Content Include="app\tests\builders\FamilyBuilderSpec.js" />
+    <Content Include="app\FamilyMapper.js" />
     <Content Include="app\tests\FamilyViewModelSpec.js" />
     <Content Include="app\tests\FamilyRepositorySpec.js" />
     <Content Include="app\tests\ServerRequestSpec.js" />

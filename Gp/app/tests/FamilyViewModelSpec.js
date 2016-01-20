@@ -24,12 +24,11 @@ describe("FamilyViewModel", function () {
 
         var vm = new gp.FamilyViewModel(repo);
 
-        repoPromise.resolve([
-        {
-            familyId: 1,
-            name: ko.observable("beans")
-        }
-        ]);
+        ;
+
+        repoPromise.resolve(
+            test.a.familyBuilder().withFamily("beans").buildKo()
+            );
 
         repoPromise.waitFor(function () {
             return vm.families().length === 1;
@@ -37,6 +36,7 @@ describe("FamilyViewModel", function () {
             expect(vm.families().length).toBe(1);
             done();
         });
+        
     });
 
     it("availableCompanions for family does not contain self", function (done) {
@@ -48,20 +48,11 @@ describe("FamilyViewModel", function () {
         var vm = new gp.FamilyViewModel(repo);
 
         repoPromise.resolve(
-            [
-                {
-                    familyId: 1,
-                    name: ko.observable("beans"),
-                    companions: ko.observableArray(),
-                    enemies: ko.observableArray()
-                },
-                {
-                    familyId: 2,
-                    name: ko.observable("spinach"),
-                    companions: ko.observableArray(),
-                    enemies: ko.observableArray()
-                }
-            ]);
+            test.a.familyBuilder()
+            .withFamily("beans")
+            .withFamily("spinach")
+            .buildKo()
+            );
 
 
         repoPromise.waitFor(function () {
@@ -84,31 +75,12 @@ describe("FamilyViewModel", function () {
         var vm = new gp.FamilyViewModel(repo);
 
         repoPromise.resolve(
-            [
-                {
-                    familyId: 1,
-                    name: ko.observable("beans"),
-                    companions: ko.observableArray([
-                        {
-                            familyId: 2,
-                            name: "spinach"
-                        }
-                        ]),
-                    enemies: ko.observableArray()
-                },
-                {
-                    familyId: 2,
-                    name: ko.observable("spinach"),
-                    companions: ko.observableArray(),
-                    enemies: ko.observableArray()
-                },
-                {
-                    familyId: 3,
-                    name: ko.observable("carrot"),
-                    companions: ko.observableArray(),
-                    enemies: ko.observableArray()
-                },
-            ]);
+            test.a.familyBuilder()
+            .withFamily("beans")
+            .withFamily("spinach")
+            .withFamily("carrot")
+            .linkCompanion("beans", "spinach")
+            .buildKo());
 
 
         repoPromise.waitFor(function () {
@@ -132,31 +104,12 @@ describe("FamilyViewModel", function () {
         var vm = new gp.FamilyViewModel(repo);
 
         repoPromise.resolve(
-            [
-                {
-                    familyId: 1,
-                    name: ko.observable("beans"),
-                    companions: ko.observableArray(),
-                    enemies: ko.observableArray([
-                        {
-                            familyId: 2,
-                            name: "spinach"
-                        }
-                    ])
-                },
-                {
-                    familyId: 2,
-                    name: ko.observable("spinach"),
-                    companions: ko.observableArray(),
-                    enemies: ko.observableArray()
-                },
-                {
-                    familyId: 3,
-                    name: ko.observable("carrot"),
-                    companions: ko.observableArray(),
-                    enemies: ko.observableArray()
-                },
-            ]);
+            test.a.familyBuilder()
+            .withFamily("beans")
+            .withFamily("spinach")
+            .withFamily("carrot")
+            .linkEnemy("beans", "spinach")
+            .buildKo());
 
 
         repoPromise.waitFor(function () {
@@ -171,7 +124,6 @@ describe("FamilyViewModel", function () {
 
     });
 
-
     it("populate availableEnemies", function (done) {
         var repo = new gp.FamilyRepository();
         var repoPromise = test.a.promiseFake();
@@ -181,31 +133,12 @@ describe("FamilyViewModel", function () {
         var vm = new gp.FamilyViewModel(repo);
 
         repoPromise.resolve(
-            [
-                {
-                    familyId: 1,
-                    name: ko.observable("beans"),
-                    companions: ko.observableArray(),
-                    enemies: ko.observableArray([
-                        {
-                            familyId: 2,
-                            name: "spinach"
-                        }
-                    ])
-                },
-                {
-                    familyId: 2,
-                    name: ko.observable("spinach"),
-                    companions: ko.observableArray(),
-                    enemies: ko.observableArray()
-                },
-                {
-                    familyId: 3,
-                    name: ko.observable("carrot"),
-                    companions: ko.observableArray(),
-                    enemies: ko.observableArray()
-                },
-            ]);
+            test.a.familyBuilder()
+            .withFamily("beans")
+            .withFamily("spinach")
+            .withFamily("carrot")
+            .linkEnemy("beans", "spinach")
+            .buildKo());
 
 
         repoPromise.waitFor(function () {

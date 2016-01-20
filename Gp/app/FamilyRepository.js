@@ -9,7 +9,7 @@
                 serverRequest
                     .sendRequest("GET", apiController)
                     .then(function (data) {
-                        resolve(mapFamilies(data));
+                        resolve(gp.familyMapper.mapFamilies(data));
                     });
 
             });
@@ -17,19 +17,6 @@
             return repoPromise;
         }
 
-        function mapFamilies(serverData) {
-            var rtnFamilies = [];
-            serverData.forEach(function (family) {
-                rtnFamilies.push({
-                    familyId: family.familyId,
-                    name: ko.observable(family.name),
-                    companions: ko.observable(family.companions),
-                    enemies: ko.observable(family.enemies)
-                });
-            });
-
-            return rtnFamilies;
-        }
 
         function post() {
 

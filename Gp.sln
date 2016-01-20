@@ -5,10 +5,6 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gp.Data", "Gp.Data\Gp.Data.csproj", "{AE6480B0-B8F4-42E5-8FC5-FFFD78949F7E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gp.MongoSeed", "Gp.MongoSeed\Gp.MongoSeed.csproj", "{3203BB0A-B098-4C08-B6D2-7C9CA04E6992}"
-EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Gp.SqlDb", "Gp.SqlDb\Gp.SqlDb.sqlproj", "{A3F8C28C-D860-4BE7-9565-1152D33563FE}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gp.Tests.Integrated", "Gp.Tests.Integrated\Gp.Tests.Integrated.csproj", "{919AD396-821E-4FFA-B5B5-D67D5F13BCC3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gp.Tests.Unit", "Gp.Tests.Unit\Gp.Tests.Unit.csproj", "{8A170CE7-E9C8-4AA2-9D59-D46AB451A044}"

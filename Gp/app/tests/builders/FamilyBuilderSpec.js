@@ -12,7 +12,7 @@ describe("FamilyBuilder", function () {
 
         var familyBuilder = new test.FamilyBuilder();
 
-        expect(familyBuilder.withFamily(family).build()).toEqual([{
+        expect(familyBuilder.withFamilyObject(family).build()).toEqual([{
             familyId: 1,
             name: "lettuce"
         }]);

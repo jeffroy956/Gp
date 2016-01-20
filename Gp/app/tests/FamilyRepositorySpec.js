@@ -32,7 +32,7 @@ describe("FamilyRepository", function () {
     it("maps family into a knockout object", function (done) {
         var request = new gp.ServerRequest();
 
-        var families = test.a.familyBuilder().withFamily({
+        var families = test.a.familyBuilder().withFamilyObject({
             familyId: 1,
             name: "lettuce",
         }).build();
@@ -59,7 +59,7 @@ describe("FamilyRepository", function () {
     it("maps family with companions", function (done) {
         var request = new gp.ServerRequest();
 
-        var families = test.a.familyBuilder().withFamily({
+        var families = test.a.familyBuilder().withFamilyObject({
             familyId: 1,
             name: "lettuce",
             companions: [{
@@ -89,7 +89,7 @@ describe("FamilyRepository", function () {
     it("maps family with enemies", function (done) {
         var request = new gp.ServerRequest();
 
-        var families = test.a.familyBuilder().withFamily({
+        var families = test.a.familyBuilder().withFamilyObject({
             familyId: 1,
             name: "lettuce",
             enemies: [{
