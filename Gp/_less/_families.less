@@ -1,4 +1,6 @@
 ﻿@import "_variables";
+@import "_mixins";
+
 .family-list{
     list-style: none;
     padding: 0;
@@ -12,9 +14,24 @@
     border: 1px solid @defaultBorderColor;
     cursor: pointer;
 }
-
+.family-edit__list-pane {
+    vertical-align: top;
+}
 .family-edit__edit-pane {
     vertical-align: top;
     padding: @doubleStandardPadding;
     border: 1px solid @defaultBorderColor;
+}
+
+.family-edit__container {
+    width: 100%;
+}
+
+.family-edit__relations-container {
+    .clearFix();
+}
+
+.family-edit__relation-section {
+    float: left;
+    width: 33.33%;
 }

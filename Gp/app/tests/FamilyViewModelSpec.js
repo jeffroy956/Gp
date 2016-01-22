@@ -115,7 +115,7 @@ describe("FamilyViewModel", function () {
             function () {
                 vm.selectFamily(vm.families()[0]);
 
-                vm.addCompanionToCurrentFamily(vm.families()[1]);
+                vm.addCompanionToFamily(vm.families()[1]);
 
                 expect(vm.currentFamily().companions().length).toBe(1);
 
@@ -139,7 +139,7 @@ describe("FamilyViewModel", function () {
             function () {
                 vm.selectFamily(vm.families()[0]);
 
-                vm.addCompanionToCurrentFamily(vm.families()[1]);
+                vm.addCompanionToFamily(vm.families()[1]);
 
                 expect(_.some(vm.availableRelations(), function (companion) {
                     return ko.unwrap(companion.name) === "spinach";
@@ -165,7 +165,7 @@ describe("FamilyViewModel", function () {
             function () {
                 vm.selectFamily(vm.families()[0]);
 
-                vm.addEnemyToCurrentFamily(vm.families()[1]);
+                vm.addEnemyToFamily(vm.families()[1]);
 
                 expect(vm.currentFamily().enemies().length).toBe(1);
 
@@ -189,7 +189,7 @@ describe("FamilyViewModel", function () {
             function () {
                 vm.selectFamily(vm.families()[0]);
 
-                vm.addEnemyToCurrentFamily(vm.families()[1]);
+                vm.addEnemyToFamily(vm.families()[1]);
 
                 expect(_.some(vm.availableRelations(), function (companion) {
                     return ko.unwrap(companion.name) === "spinach";

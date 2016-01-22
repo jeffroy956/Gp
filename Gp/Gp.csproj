@@ -144,6 +144,7 @@
     <Content Include="_less\_base.less" />
     <Content Include="_less\_families.less" />
     <Content Include="_less\_variables.less" />
+    <Content Include="_less\_mixins.less" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />

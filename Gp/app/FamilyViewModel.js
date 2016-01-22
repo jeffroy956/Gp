@@ -20,14 +20,14 @@
             populateAvailableRelations(family);
         }
 
-        this.addCompanionToCurrentFamily = function (companion) {
-            this.currentFamily().companions.push(companion);
-            this.availableRelations.remove(companion);
+        this.addCompanionToFamily = function (companion) {
+            _self.currentFamily().companions.push(companion);
+            _self.availableRelations.remove(companion);
         }
 
-        this.addEnemyToCurrentFamily = function (enemy) {
-            this.currentFamily().enemies.push(enemy);
-            this.availableRelations.remove(enemy);
+        this.addEnemyToFamily = function (enemy) {
+            _self.currentFamily().enemies.push(enemy);
+            _self.availableRelations.remove(enemy);
         }
 
         function populateAvailableRelations(currentFamily) {
