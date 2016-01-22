@@ -13,28 +13,34 @@
         });
 
         this.currentFamily = ko.observable();
-        this.availableCompanions = ko.observableArray();
-        this.availableEnemies = ko.observableArray();
+        this.availableRelations = ko.observableArray();
 
         this.selectFamily = function (family) {
             _self.currentFamily(family);
-            populateAvailableRelations(family, "companions", "enemies");
-            populateAvailableRelations(family, "enemies", "companions");
+            populateAvailableRelations(family);
         }
 
-        function populateAvailableRelations(currentFamily, targetRelationType, otherRelationType) {
+        this.addCompanionToCurrentFamily = function (companion) {
+            this.currentFamily().companions.push(companion);
+            this.availableRelations.remove(companion);
+        }
+
+        this.addEnemyToCurrentFamily = function (enemy) {
+            this.currentFamily().enemies.push(enemy);
+            this.availableRelations.remove(enemy);
+        }
+
+        function populateAvailableRelations(currentFamily) {
             var unselectedRelations = [];
-            var targetRelationList = currentFamily[targetRelationType]();
-            var otherRelationList = currentFamily[otherRelationType]();
 
             _self.families().forEach(function (potentialRelation) {
                 if (currentFamily.familyId !== potentialRelation.familyId &&
-                    !hasRelation(targetRelationList, potentialRelation) &&
-                    !hasRelation(otherRelationList, potentialRelation)) {
+                    !hasRelation(currentFamily.companions(), potentialRelation) &&
+                    !hasRelation(currentFamily.enemies(), potentialRelation)) {
                     unselectedRelations.push(potentialRelation);
                 }
             });
-            _self['available' + targetRelationType.substring(0, 1).toUpperCase() + targetRelationType.substring(1)](unselectedRelations);
+            _self.availableRelations(unselectedRelations);
         }
 
         function hasRelation(searchList, potentialRelation) {

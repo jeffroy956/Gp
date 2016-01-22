@@ -9,8 +9,8 @@
                 rtnFamilies.push({
                     familyId: family.familyId,
                     name: ko.observable(family.name),
-                    companions: ko.observable(family.companions),
-                    enemies: ko.observable(family.enemies)
+                    companions: ko.observableArray(family.companions),
+                    enemies: ko.observableArray(family.enemies)
                 });
             });
 

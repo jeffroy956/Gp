@@ -15,26 +15,18 @@
                 </ul>
             </td>
             <td class="family-edit__edit-pane">
-                <table data-bind="with: currentFamily">
-                    <tr>
-                        <td>
-                            <div>Family Name</div>
-                            <div>
-                                <input data-bind="value: name" />
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div>Companions</div>
-                            
-                        </td>
-                        <td>
-                            <div>Enemies</div>
-
-                        </td>
-                    </tr>
-                </table>
+                <div data-bind="with: currentFamily">
+                    <h3>Family Name</h3>
+                    <div>
+                        <input data-bind="value: name" />
+                    </div>
+                    <h3>Available Relations</h3>
+                    <ul data-bind="foreach: $parent.availableRelations">
+                        <li>
+                            <div data-bind="text: name"></div>
+                        </li>
+                    </ul>
+                </div>
             </td>
         </tr>
     </table>
@@ -42,6 +34,7 @@
 </div>
 @section Scripts{
     <script src="~/app/ServerRequest.js"></script>
+    <script src="~/app/FamilyMapper.js"></script>
     <script src="~/app/FamilyRepository.js"></script>
     <script src="~/app/FamilyViewModel.js"></script>
     <script>

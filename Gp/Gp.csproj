@@ -128,7 +128,6 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="gruntfile.js" />
-    <Content Include="karma.conf.js" />
     <Content Include="Scripts\jasmine-2.4.1\boot.js" />
     <Content Include="Scripts\jasmine-2.4.1\console.js" />
     <Content Include="Scripts\jasmine-2.4.1\jasmine-html.js" />

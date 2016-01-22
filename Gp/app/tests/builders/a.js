@@ -22,29 +22,30 @@
             rejectHandler = reject;
         });
 
-        function waitFor(predicate, done) {
-            var maxWait = 25;
-            var numWaits = 0;
-            function keepWaiting() {
-                setTimeout(function () {
-                    if (numWaits < maxWait && !predicate()) {
-                        numWaits++;
-                        keepWaiting();
-                    }
-                    else {
-                        done();
-                    }
-                }, 1);
-            }
+        function resolveNow(data, done) {
+            Promise.all([promise])
+                .then(function () {
+                    done();
+                });
 
-            keepWaiting();
+            resolveHandler(data);
+        }
+        
+        function rejectNow(data, done) {
+            Promise.all([promise])
+                .catch(function () {
+                    done();
+                });
+
+            rejectHandler(data);
         }
 
         return {
             resolve: resolveHandler,
             reject: rejectHandler,
-            promise: promise,
-            waitFor: waitFor
+            resolveNow: resolveNow,
+            rejectNow: rejectNow,
+            promise: promise
         }
     }
 
