@@ -59,9 +59,17 @@
         };
 
         this.buildKo = function () {
-            return gp.familyMapper.mapFamilies(_families);
+            return mapFamilies(_families);
         }
 
+        function mapFamilies(serverData) {
+            var rtnFamilies = [];
+            serverData.forEach(function (family) {
+                rtnFamilies.push(new gp.Family(family));
+            });
+
+            return rtnFamilies;
+        }
     }
 
     test.FamilyBuilder = FamilyBuilder;

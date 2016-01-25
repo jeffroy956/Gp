@@ -1,30 +1,53 @@
 ﻿@import "_variables";
 @import "_mixins";
+.family-edit__container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.family-edit__list-pane {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    bottom: 0;
+    width: 25%;
+    overflow: auto;
+}
+.family-edit__edit-pane {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    bottom: 0;
+    left: 25%;
+    width: 70%;
+    overflow: auto;
+    padding: @doubleStandardPadding;
+    border: 1px solid @defaultBorderColor;
+}
 
 .family-list{
     list-style: none;
     padding: 0;
     margin: 0;
-    max-height: 500px;
     overflow: auto;
 }
-.family-list__item-name {
+.family-list__item {
+    display: flex;
+    box-sizing: border-box;
+    width: 100%;
     margin: 0;
     padding: @doubleStandardPadding;
     border: 1px solid @defaultBorderColor;
     cursor: pointer;
 }
-.family-edit__list-pane {
-    vertical-align: top;
-}
-.family-edit__edit-pane {
-    vertical-align: top;
-    padding: @doubleStandardPadding;
-    border: 1px solid @defaultBorderColor;
+
+.family-relation__name {
+    flex: 1;
 }
 
-.family-edit__container {
-    width: 100%;
+.family-relation__command {
+    padding: 0 @standardPadding;
+    font-size: 1.1em;
 }
 
 .family-edit__relations-container {
@@ -32,6 +55,8 @@
 }
 
 .family-edit__relation-section {
+    box-sizing: border-box;
     float: left;
     width: 33.33%;
+    padding: @standardPadding;
 }

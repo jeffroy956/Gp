@@ -9,12 +9,21 @@
                 serverRequest
                     .sendRequest("GET", apiController)
                     .then(function (data) {
-                        resolve(gp.familyMapper.mapFamilies(data));
+                        resolve(mapFamilies(data));
                     });
 
             });
 
             return repoPromise;
+        }
+
+        function mapFamilies(serverData) {
+            var rtnFamilies = [];
+            serverData.forEach(function (family) {
+                rtnFamilies.push(new gp.Family(family));
+            });
+
+            return rtnFamilies;
         }
 
 

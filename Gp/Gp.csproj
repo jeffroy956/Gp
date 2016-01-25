@@ -110,6 +110,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\Family.js" />
     <Content Include="app\FamilyViewModel.js" />
     <Content Include="app\FamilyRepository.js" />
     <Content Include="app\ServerRequest.js" />
@@ -118,7 +119,7 @@
     <Content Include="app\tests\builders\a.js" />
     <Content Include="app\tests\builders\FamilyBuilder.js" />
     <Content Include="app\tests\builders\FamilyBuilderSpec.js" />
-    <Content Include="app\FamilyMapper.js" />
+    <Content Include="app\tests\FamilySpec.js" />
     <Content Include="app\tests\FamilyViewModelSpec.js" />
     <Content Include="app\tests\FamilyRepositorySpec.js" />
     <Content Include="app\tests\ServerRequestSpec.js" />
@@ -126,6 +127,16 @@
     <Content Include="bower_components\lodash\dist\lodash.js" />
     <Content Include="bower_components\lodash\dist\lodash.min.js" />
     <Content Include="favicon.ico" />
+    <Content Include="font\css\animation.css" />
+    <Content Include="font\css\fontello-codes.css" />
+    <Content Include="font\css\fontello-embedded.css" />
+    <Content Include="font\css\fontello-ie7-codes.css" />
+    <Content Include="font\css\fontello-ie7.css" />
+    <Content Include="font\css\fontello.css" />
+    <Content Include="font\demo.html" />
+    <Content Include="font\font\fontello.svg" />
+    <Content Include="font\LICENSE.txt" />
+    <Content Include="font\README.txt" />
     <Content Include="Global.asax" />
     <Content Include="gruntfile.js" />
     <Content Include="Scripts\jasmine-2.4.1\boot.js" />
@@ -141,10 +152,10 @@
     <Content Include="Web.config" />
     <Content Include="_less\_normalize.less" />
     <Content Include="_less\website.less" />
-    <Content Include="_less\_base.less" />
     <Content Include="_less\_families.less" />
     <Content Include="_less\_variables.less" />
     <Content Include="_less\_mixins.less" />
+    <Content Include="_less\_layout.less" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -165,6 +176,10 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="package.json" />
+    <Content Include="font\config.json" />
+    <Content Include="font\font\fontello.eot" />
+    <Content Include="font\font\fontello.ttf" />
+    <Content Include="font\font\fontello.woff" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

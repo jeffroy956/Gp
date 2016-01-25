@@ -3,8 +3,8 @@
     "use strict";
 
     function FamilyViewModel(familyRepository) {
-        var _self = this;
 
+        //todo: remove this references, do lexical scope with public api
         this.families = ko.observableArray([]);
 
         familyRepository.getAll()
@@ -20,10 +20,10 @@
             populateAvailableRelations(family);
         }
 
-        this.addCompanionToFamily = function (companion) {
-            _self.currentFamily().companions.push(companion);
-            _self.availableRelations.remove(companion);
-        }
+        //this.addCompanionToFamily = function (companion) {
+        //    _self.currentFamily().companions.push(companion);
+        //    _self.availableRelations.remove(companion);
+        //}
 
         this.addEnemyToFamily = function (enemy) {
             _self.currentFamily().enemies.push(enemy);

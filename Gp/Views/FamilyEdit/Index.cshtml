@@ -1,62 +1,64 @@
-﻿@{ 
+﻿@{
     ViewBag.Title = "Plant Families";
 }
-<h2>
-    The family edit page
-</h2>
-<table class="family-edit__container">
-    <tr>
-        <td class="family-edit__list-pane">
-            <ul class="family-list" data-bind="foreach: families">
-                <li class="family-list__item">
-                    <h3 class="family-list__item-name" data-bind="text: name, click: $root.selectFamily"></h3>
-                </li>
-            </ul>
-        </td>
-        <td class="family-edit__edit-pane">
-            <div data-bind="with: currentFamily">
+<div class="family-edit__container">
+    <div class="family-edit__list-pane">
+        <ul class="family-list" data-bind="foreach: families">
+            <li class="family-list__item">
+                <div class="family-list__item-name" data-bind="text: name, click: $root.selectFamily"></div>
+            </li>
+        </ul>
+    </div>
+    <div class="family-edit__edit-pane">
+        <div data-bind="with: currentFamily">
+            <div>
+                <h3>Family Name</h3>
                 <div>
-                    <h3>Family Name</h3>
-                    <div>
-                        <input data-bind="value: name" />
-                    </div>
-                </div>
-                <div class="family-edit__relations-container">
-                    <div class="family-edit__relation-section">
-                        <h3>Available Relations</h3>
-                        <ul data-bind="foreach: $root.availableRelations">
-                            <li>
-                                <div data-bind="text: name"></div>
-                                <button data-bind="click: $root.addCompanionToFamily">Add To Companions</button>
-                                <button data-bind="click: $root.addEnemyToFamily">Add To Enemies</button>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="family-edit__relation-section">
-                        <h3>Companions</h3>
-                        <ul data-bind="foreach: companions">
-                            <li>
-                                <div data-bind="text: name"></div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="family-edit__relation-section">
-                        <h3>Enemies</h3>
-                        <ul data-bind="foreach: enemies">
-                            <li>
-                                <div data-bind="text: name"></div>
-                            </li>
-                        </ul>
-                    </div>
+                    <input data-bind="value: name" />
                 </div>
             </div>
-        </td>
-    </tr>
-</table>
+            <div class="family-edit__relations-container">
+                <div class="family-edit__relation-section">
+                    <h3>Available Relations</h3>
+                    <ul class="family-list" data-bind="foreach: $root.availableRelations">
+                        <li class="family-list__item">
+                            <div class="family-relation__name" data-bind="text: name"></div>
+                            <div class="family-relation__command">
+                                <span class="icon-thumbs-up" data-bind="click: $root.addCompanionToFamily"></span>
+                            </div>
+                            <div class="family-relation__command">
+                                <span class="icon-thumbs-down" data-bind="click: $root.addEnemyToFamily"></span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="family-edit__relation-section">
+                    <h3>Companions</h3>
+                    <ul class="family-list" data-bind="foreach: companions">
+                        <li class="family-list__item">
+                            <div class="family-relation__name" data-bind="text: name"></div>
+                            <div class="family-relation__command">
+                                <span class="icon-trash"></span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="family-edit__relation-section">
+                    <h3>Enemies</h3>
+                    <ul class="family-list" data-bind="foreach: enemies">
+                        <li class="family-list__item">
+                            <div class="family-relation__name" data-bind="text: name"></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section Scripts{
     <script src="~/app/ServerRequest.js"></script>
-    <script src="~/app/FamilyMapper.js"></script>
+    <script src="~/app/Family.js"></script>
     <script src="~/app/FamilyRepository.js"></script>
     <script src="~/app/FamilyViewModel.js"></script>
     <script>

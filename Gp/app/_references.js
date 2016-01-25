@@ -3,6 +3,6 @@
 /// <reference path="C:\git\Gp\Gp\bower_components/lodash/dist/lodash.js" />
 
 /// <reference path="ServerRequest.js" />
-/// <reference path="FamilyMapper.js" />
+/// <reference path="Family.js" />
 /// <reference path="FamilyRepository.js" />
 /// <reference path="FamilyViewModel.js" />
