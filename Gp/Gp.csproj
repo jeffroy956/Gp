@@ -110,6 +110,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\Event.js" />
     <Content Include="app\Family.js" />
     <Content Include="app\FamilyViewModel.js" />
     <Content Include="app\FamilyRepository.js" />
@@ -119,6 +120,7 @@
     <Content Include="app\tests\builders\a.js" />
     <Content Include="app\tests\builders\FamilyBuilder.js" />
     <Content Include="app\tests\builders\FamilyBuilderSpec.js" />
+    <Content Include="app\tests\EventSpec.js" />
     <Content Include="app\tests\FamilySpec.js" />
     <Content Include="app\tests\FamilyViewModelSpec.js" />
     <Content Include="app\tests\FamilyRepositorySpec.js" />

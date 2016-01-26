@@ -6,21 +6,27 @@
         var familyId = dto.familyId;
         var companions = ko.observableArray(dto.companions);
         var enemies = ko.observableArray(dto.enemies);
+        var onRelationAdded = new gp.Event(this);
+        var onRelationRemoved = new gp.Event(this);
 
         function addCompanion(companion) {
             companions.push(companion);
+            onRelationAdded.notify(companion);
         }
 
         function removeCompanion(companion) {
             companions.remove(companion);
+            onRelationRemoved.notify(companion);
         }
 
         function addEnemy(enemy) {
             enemies.push(enemy);
+            onRelationAdded.notify(enemy);
         }
 
         function removeEnemy(enemy) {
             enemies.remove(enemy);
+            onRelationRemoved.notify(enemy);
         }
 
         var publicApi = {
@@ -31,7 +37,9 @@
             addCompanion: addCompanion,
             removeCompanion: removeCompanion,
             addEnemy: addEnemy,
-            removeEnemy: removeEnemy
+            removeEnemy: removeEnemy,
+            onRelationAdded: onRelationAdded,
+            onRelationRemoved: onRelationRemoved
         }
 
         return publicApi;

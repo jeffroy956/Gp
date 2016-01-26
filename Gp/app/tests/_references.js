@@ -1,4 +1,5 @@
-﻿/// <reference path="../ServerRequest.js" />
+﻿/// <reference path="../Event.js" />
+/// <reference path="../ServerRequest.js" />
 /// <reference path="../FamilyRepository.js" />
 /// <reference path="../FamilyViewModel.js" />
 /// <reference path="../Family.js" />
