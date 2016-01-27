@@ -2,57 +2,69 @@
     ViewBag.Title = "Plant Families";
 }
 <div class="family-edit__container">
-    <div class="family-edit__list-pane">
-        <ul class="family-list" data-bind="foreach: families">
-            <li class="family-list__item">
-                <div class="family-list__item-name" data-bind="text: name, click: $root.selectFamily"></div>
-            </li>
-        </ul>
+    <div class="family-edit__top-bar">
+        <div class="family-edit__commands">
+            <button>
+                <span class="icon-floppy"></span>
+            </button>
+            <button>
+                <span class="icon-block"></span>
+            </button>
+        </div>
     </div>
-    <div class="family-edit__edit-pane">
-        <div data-bind="with: currentFamily">
-            <div>
-                <h3>Family Name</h3>
+    <div class="family-edit__main-content">
+        <div class="family-edit__list-pane">
+            <ul class="family-list" data-bind="foreach: families">
+                <li class="family-list__item">
+                    <div class="family-list__item-name" data-bind="text: name, click: $root.selectFamily"></div>
+                </li>
+            </ul>
+        </div>
+        <div class="family-edit__edit-pane">
+            <div data-bind="with: currentFamily">
                 <div>
-                    <input data-bind="value: name" />
+                    <h3>Family Name</h3>
+                    <div>
+                        <input data-bind="value: name" />
+                    </div>
                 </div>
-            </div>
-            <div class="family-edit__relations-container">
-                <div class="family-edit__relation-section">
-                    <h3>Available Relations</h3>
-                    <ul class="family-list" data-bind="foreach: $root.availableRelations">
-                        <li class="family-list__item">
-                            <div class="family-relation__name" data-bind="text: name"></div>
-                            <div class="family-relation__command">
-                                <span class="icon-thumbs-up" data-bind="click: $root.addCompanion"></span>
-                            </div>
-                            <div class="family-relation__command">
-                                <span class="icon-thumbs-down" data-bind="click: $root.addEnemy"></span>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="family-edit__relation-section">
-                    <h3>Companions</h3>
-                    <ul class="family-list" data-bind="foreach: companions">
-                        <li class="family-list__item">
-                            <div class="family-relation__name" data-bind="text: name"></div>
-                            <div class="family-relation__command">
-                                <span class="icon-trash" data-bind="click: $root.removeCompanion"></span>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="family-edit__relation-section">
-                    <h3>Enemies</h3>
-                    <ul class="family-list" data-bind="foreach: enemies">
-                        <li class="family-list__item">
-                            <div class="family-relation__name" data-bind="text: name"></div>
-                            <div class="family-relation__command">
-                                <span class="icon-trash" data-bind="click: $root.removeEnemy"></span>
-                            </div>
-                        </li>
-                    </ul>
+                <div class="family-edit__relations-container">
+                    <div class="family-edit__relation-section">
+                        <h3>Available Relations</h3>
+                        <ul class="family-list" data-bind="foreach: $root.availableRelations">
+                            <li class="family-list__item">
+                                <div class="family-relation__name" data-bind="text: name"></div>
+                                <div class="family-relation__command">
+                                    <span class="icon-thumbs-up" data-bind="click: $root.addCompanion"></span>
+                                </div>
+                                <div class="family-relation__command">
+                                    <span class="icon-thumbs-down" data-bind="click: $root.addEnemy"></span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="family-edit__relation-section">
+                        <h3>Companions</h3>
+                        <ul class="family-list" data-bind="foreach: companions">
+                            <li class="family-list__item">
+                                <div class="family-relation__name" data-bind="text: name"></div>
+                                <div class="family-relation__command">
+                                    <span class="icon-trash" data-bind="click: $root.removeCompanion"></span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="family-edit__relation-section">
+                        <h3>Enemies</h3>
+                        <ul class="family-list" data-bind="foreach: enemies">
+                            <li class="family-list__item">
+                                <div class="family-relation__name" data-bind="text: name"></div>
+                                <div class="family-relation__command">
+                                    <span class="icon-trash" data-bind="click: $root.removeEnemy"></span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
