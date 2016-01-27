@@ -38,7 +38,7 @@
                         <li class="family-list__item">
                             <div class="family-relation__name" data-bind="text: name"></div>
                             <div class="family-relation__command">
-                                <span class="icon-trash"></span>
+                                <span class="icon-trash" data-bind="click: $root.removeCompanion"></span>
                             </div>
                         </li>
                     </ul>
@@ -48,6 +48,9 @@
                     <ul class="family-list" data-bind="foreach: enemies">
                         <li class="family-list__item">
                             <div class="family-relation__name" data-bind="text: name"></div>
+                            <div class="family-relation__command">
+                                <span class="icon-trash" data-bind="click: $root.removeEnemy"></span>
+                            </div>
                         </li>
                     </ul>
                 </div>

@@ -178,6 +178,87 @@ describe("FamilyViewModel", function () {
             });
     }, asyncTimeout);
 
+    it("removing a companion adds it back into list of available relations at first index", function (done) {
+        var repo = new gp.FamilyRepository();
+
+        var repoPromise = test.a.promiseFake();
+        spyOn(repo, "getAll").and.returnValue(repoPromise.promise);
+
+        var vm = new gp.FamilyViewModel(repo);
+
+        repoPromise.resolveNow(
+            test.a.familyBuilder()
+            .withFamily("alfalfa")
+            .withFamily("beans")
+            .withFamily("corn")
+            .withFamily("spinach")
+            .buildKo(),
+            function () {
+                vm.selectFamily(vm.families()[1]);
+
+                vm.addCompanion(vm.families()[0]);
+                vm.removeCompanion(vm.families()[0]);
+
+                expect(ko.unwrap(vm.availableRelations()[0].name)).toBe("alfalfa");
+
+                done();
+            });
+    }, asyncTimeout);
+
+    it("removing a companion adds it back into list of available relations at last index", function (done) {
+        var repo = new gp.FamilyRepository();
+
+        var repoPromise = test.a.promiseFake();
+        spyOn(repo, "getAll").and.returnValue(repoPromise.promise);
+
+        var vm = new gp.FamilyViewModel(repo);
+
+        repoPromise.resolveNow(
+            test.a.familyBuilder()
+            .withFamily("alfalfa")
+            .withFamily("beans")
+            .withFamily("corn")
+            .withFamily("spinach")
+            .buildKo(),
+            function () {
+                vm.selectFamily(vm.families()[0]);
+
+                vm.addCompanion(vm.families()[3]);
+                vm.removeCompanion(vm.families()[3]);
+
+                expect(ko.unwrap(vm.availableRelations()[2].name)).toBe("spinach");
+
+                done();
+            });
+    }, asyncTimeout);
+
+    it("removing a companion adds it back into list of available relations in middle", function (done) {
+        var repo = new gp.FamilyRepository();
+
+        var repoPromise = test.a.promiseFake();
+        spyOn(repo, "getAll").and.returnValue(repoPromise.promise);
+
+        var vm = new gp.FamilyViewModel(repo);
+
+        repoPromise.resolveNow(
+            test.a.familyBuilder()
+            .withFamily("alfalfa")
+            .withFamily("beans")
+            .withFamily("corn")
+            .withFamily("spinach")
+            .buildKo(),
+            function () {
+                vm.selectFamily(vm.families()[0]);
+
+                vm.addCompanion(vm.families()[2]);
+                vm.removeCompanion(vm.families()[2]);
+
+                expect(ko.unwrap(vm.availableRelations()[1].name)).toBe("corn");
+
+                done();
+            });
+    }, asyncTimeout);
+
     it("removing an enemy adds it back into list of available relations", function (done) {
         var repo = new gp.FamilyRepository();
 

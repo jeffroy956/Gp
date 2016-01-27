@@ -29,22 +29,29 @@
 
         function removeCompanion(family) {
             currentFamily().removeCompanion(family);
-            availableRelations.push(family);
+            insertAvailableRelation(family);
         }
 
         function removeEnemy(family) {
             currentFamily().removeEnemy(family);
-            availableRelations.push(family);
+            insertAvailableRelation(family);
         }
 
-        //function handleRelationChanged(sender, changeFamilyArgs) {
-        //    if (changeFamilyArgs.action === "added") {
-        //        availableRelations.remove(changeFamilyArgs.family);
-        //    }
-        //    else if (changeFamilyArgs.action === "removed") {
-        //        availableRelations.push(changeFamilyArgs.family);
-        //    }
-        //}
+        function insertAvailableRelation(family) {
+            var relations = availableRelations();
+            if (relations.length === 0) {
+                availableRelations.push(family);
+            }
+            else {
+                var index;
+                for (index = 0; index < relations.length; index++) {
+                    if (ko.unwrap(relations[index].name) > ko.unwrap(family.name)) {
+                        break;
+                    }
+                }
+                availableRelations.splice(index, 0, family);
+            }
+        }
 
         function populateAvailableRelations(currentFamily) {
             var unselectedRelations = [];
