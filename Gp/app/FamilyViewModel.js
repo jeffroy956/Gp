@@ -13,13 +13,22 @@
         });
 
         function selectFamily(family) {
+            var deselected = currentFamily();
+            if (deselected) {
+                deselected.onRelationChanged.detach(handleRelationChanged);
+            }
             currentFamily(family);
+            family.onRelationChanged.attach(handleRelationChanged);
             populateAvailableRelations(family);
         }
 
-        function addEnemyToFamily(enemy) {
-            currentFamily().enemies.push(enemy);
-            availableRelations.remove(enemy);
+        function handleRelationChanged(sender, changeFamilyArgs) {
+            if (changeFamilyArgs.action === "added") {
+                availableRelations.remove(changeFamilyArgs.family);
+            }
+            else if (changeFamilyArgs.action === "removed") {
+                availableRelations.push(changeFamilyArgs.family);
+            }
         }
 
         function populateAvailableRelations(currentFamily) {
@@ -45,8 +54,7 @@
             families: families,
             currentFamily: currentFamily,
             availableRelations: availableRelations,
-            selectFamily: selectFamily,
-            addEnemyToFamily: addEnemyToFamily
+            selectFamily: selectFamily
         }
 
         return publicApi;

@@ -6,27 +6,35 @@
         var familyId = dto.familyId;
         var companions = ko.observableArray(dto.companions);
         var enemies = ko.observableArray(dto.enemies);
-        var onRelationAdded = new gp.Event(this);
-        var onRelationRemoved = new gp.Event(this);
+        var isDirty = ko.observable(false);
+        var dirtyCheckFields = [name, companions, enemies];
+
+        dirtyCheckFields.forEach(function (observable) {
+            observable.subscribe(function () {
+                isDirty(true);
+            });
+        });
+
+        var onRelationChanged = new gp.Event(this);
 
         function addCompanion(companion) {
             companions.push(companion);
-            onRelationAdded.notify(companion);
+            onRelationChanged.notify({ action: "added", family: companion });
         }
 
         function removeCompanion(companion) {
             companions.remove(companion);
-            onRelationRemoved.notify(companion);
+            onRelationChanged.notify({ action: "removed", family: companion });
         }
 
         function addEnemy(enemy) {
             enemies.push(enemy);
-            onRelationAdded.notify(enemy);
+            onRelationChanged.notify({ action: "added", family: enemy });
         }
 
         function removeEnemy(enemy) {
             enemies.remove(enemy);
-            onRelationRemoved.notify(enemy);
+            onRelationChanged.notify({ action: "removed", family: enemy });
         }
 
         var publicApi = {
@@ -38,8 +46,8 @@
             removeCompanion: removeCompanion,
             addEnemy: addEnemy,
             removeEnemy: removeEnemy,
-            onRelationAdded: onRelationAdded,
-            onRelationRemoved: onRelationRemoved
+            onRelationChanged: onRelationChanged,
+            isDirty: isDirty
         }
 
         return publicApi;
