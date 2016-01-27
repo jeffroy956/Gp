@@ -165,10 +165,10 @@ describe("FamilyViewModel", function () {
             function () {
                 vm.selectFamily(vm.families()[0]);
 
-                vm.currentFamily().addCompanion(vm.families()[1]);
+                vm.addCompanion(vm.families()[1]);
 
-                expect(_.some(vm.availableRelations(), function (companion) {
-                    return ko.unwrap(companion.name) === "spinach";
+                expect(_.some(vm.availableRelations(), function (relation) {
+                    return ko.unwrap(relation.name) === "spinach";
                 })).toBe(false);
 
                 done();
@@ -190,11 +190,10 @@ describe("FamilyViewModel", function () {
             .buildKo(),
             function () {
                 vm.selectFamily(vm.families()[0]);
+                vm.addEnemy(vm.families()[1]);
 
-                vm.currentFamily().addEnemy(vm.families()[1]);
-
-                expect(_.some(vm.availableRelations(), function (companion) {
-                    return ko.unwrap(companion.name) === "spinach";
+                expect(_.some(vm.availableRelations(), function (relation) {
+                    return ko.unwrap(relation.name) === "spinach";
                 })).toBe(false);
 
                 done();
@@ -217,11 +216,38 @@ describe("FamilyViewModel", function () {
             function () {
                 vm.selectFamily(vm.families()[0]);
 
-                vm.currentFamily().addCompanion(vm.families()[1]);
-                vm.currentFamily().removeCompanion(vm.families()[1]);
+                vm.addCompanion(vm.families()[1]);
+                vm.removeCompanion(vm.families()[1]);
 
-                expect(_.some(vm.availableRelations(), function (companion) {
-                    return ko.unwrap(companion.name) === "spinach";
+                expect(_.some(vm.availableRelations(), function (relation) {
+                    return ko.unwrap(relation.name) === "spinach";
+                })).toBe(true);
+
+                done();
+            });
+    }, asyncTimeout);
+
+    it("removing an enemy adds it back into list of available relations", function (done) {
+        var repo = new gp.FamilyRepository();
+
+        var repoPromise = test.a.promiseFake();
+        spyOn(repo, "getAll").and.returnValue(repoPromise.promise);
+
+        var vm = new gp.FamilyViewModel(repo);
+
+        repoPromise.resolveNow(
+            test.a.familyBuilder()
+            .withFamily("beans")
+            .withFamily("spinach")
+            .buildKo(),
+            function () {
+                vm.selectFamily(vm.families()[0]);
+
+                vm.addEnemy(vm.families()[1]);
+                vm.removeEnemy(vm.families()[1]);
+
+                expect(_.some(vm.availableRelations(), function (relation) {
+                    return ko.unwrap(relation.name) === "spinach";
                 })).toBe(true);
 
                 done();

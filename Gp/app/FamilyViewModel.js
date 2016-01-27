@@ -22,6 +22,22 @@
             populateAvailableRelations(family);
         }
 
+        function addCompanion(family) {
+            currentFamily().addCompanion(family);
+        }
+
+        function addEnemy(family) {
+            currentFamily().addEnemy(family);
+        }
+
+        function removeCompanion(family) {
+            currentFamily().removeCompanion(family);
+        }
+
+        function removeEnemy(family) {
+            currentFamily().removeEnemy(family);
+        }
+
         function handleRelationChanged(sender, changeFamilyArgs) {
             if (changeFamilyArgs.action === "added") {
                 availableRelations.remove(changeFamilyArgs.family);
@@ -54,7 +70,12 @@
             families: families,
             currentFamily: currentFamily,
             availableRelations: availableRelations,
-            selectFamily: selectFamily
+            selectFamily: selectFamily,
+            addCompanion: addCompanion,
+            removeCompanion, removeCompanion,
+            addEnemy: addEnemy,
+            removeEnemy: removeEnemy
+            
         }
 
         return publicApi;
