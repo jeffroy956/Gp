@@ -15,26 +15,20 @@
             });
         });
 
-        var onRelationChanged = new gp.Event(this);
-
         function addCompanion(companion) {
             companions.push(companion);
-            onRelationChanged.notify({ action: "added", family: companion });
         }
 
         function removeCompanion(companion) {
             companions.remove(companion);
-            onRelationChanged.notify({ action: "removed", family: companion });
         }
 
         function addEnemy(enemy) {
             enemies.push(enemy);
-            onRelationChanged.notify({ action: "added", family: enemy });
         }
 
         function removeEnemy(enemy) {
             enemies.remove(enemy);
-            onRelationChanged.notify({ action: "removed", family: enemy });
         }
 
         var publicApi = {
@@ -46,7 +40,6 @@
             removeCompanion: removeCompanion,
             addEnemy: addEnemy,
             removeEnemy: removeEnemy,
-            onRelationChanged: onRelationChanged,
             isDirty: isDirty
         }
 

@@ -33,24 +33,6 @@ describe("Family", function () {
         expect(ko.unwrap(family.companions()[0].name)).toBe("cukes");
     });
 
-    it("adding companion raises onRelationChanged event", function () {
-        var dto = {
-            familyId: 1,
-            name: "lettuce",
-        };
-
-        var family = new gp.Family(dto);
-
-        var changedRelationArgs;
-        family.onRelationChanged.attach(function (sender, args) {
-            changedRelationArgs = args;
-        });
-
-        family.addCompanion({ familyId: 2, name: "cukes" });
-
-        expect(changedRelationArgs).toEqual({ action: "added", family: { familyId: 2, name: "cukes" } });
-    });
-
     it("adds an enemy to family", function () {
         var dto = {
             familyId: 1,
@@ -62,24 +44,6 @@ describe("Family", function () {
         family.addEnemy({ familyId: 2, name: "cukes" });
 
         expect(ko.unwrap(family.enemies()[0].name)).toBe("cukes");
-    });
-
-    it("adding enemy raises onRelationChanged event", function () {
-        var dto = {
-            familyId: 1,
-            name: "lettuce",
-        };
-
-        var family = new gp.Family(dto);
-
-        var changedRelationArgs;
-        family.onRelationChanged.attach(function (sender, args) {
-            changedRelationArgs = args;
-        });
-
-        family.addEnemy({ familyId: 2, name: "cukes" });
-
-        expect(changedRelationArgs).toEqual({ action: "added", family: { familyId: 2, name: "cukes" }});
     });
 
     it("removes a companion from family", function () {
@@ -99,29 +63,6 @@ describe("Family", function () {
         expect(family.companions().length).toBe(0);
     });
 
-    it("removing a companion raises onRelationChanged event", function () {
-        var dto = {
-            familyId: 1,
-            name: "lettuce",
-        };
-
-        var family = new gp.Family(dto);
-
-        var changedRelationArgs;
-
-        family.onRelationChanged.attach(function (sender, args) {
-            changedRelationArgs = args;
-        });
-
-        var companion = { familyId: 2, name: "cukes" };
-
-        family.addCompanion(companion);
-
-        family.removeCompanion(companion);
-
-        expect(changedRelationArgs).toEqual({ action: "removed", family: { familyId: 2, name: "cukes" }});
-    });
-
     it("removes an enemy from family", function () {
         var dto = {
             familyId: 1,
@@ -135,29 +76,6 @@ describe("Family", function () {
         family.removeEnemy(enemy);
 
         expect(ko.unwrap(family.enemies().length)).toBe(0);
-    });
-
-    it("removing an enemy raises onRelationChanged event", function () {
-        var dto = {
-            familyId: 1,
-            name: "lettuce",
-        };
-
-        var family = new gp.Family(dto);
-
-        var changedRelationArgs;
-
-        family.onRelationChanged.attach(function (sender, args) {
-            changedRelationArgs = args;
-        });
-
-        var enemy = { familyId: 2, name: "cukes" };
-
-        family.addEnemy(enemy);
-
-        family.removeEnemy(enemy);
-
-        expect(changedRelationArgs).toEqual({ action: "removed", family: { familyId: 2, name: "cukes" } });
     });
 
     it("dirty flag is initially false when initially constructed from dto", function () {

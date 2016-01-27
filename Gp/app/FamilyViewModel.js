@@ -13,39 +13,38 @@
         });
 
         function selectFamily(family) {
-            var deselected = currentFamily();
-            if (deselected) {
-                deselected.onRelationChanged.detach(handleRelationChanged);
-            }
             currentFamily(family);
-            family.onRelationChanged.attach(handleRelationChanged);
             populateAvailableRelations(family);
         }
 
         function addCompanion(family) {
             currentFamily().addCompanion(family);
+            availableRelations.remove(family);
         }
 
         function addEnemy(family) {
             currentFamily().addEnemy(family);
+            availableRelations.remove(family);
         }
 
         function removeCompanion(family) {
             currentFamily().removeCompanion(family);
+            availableRelations.push(family);
         }
 
         function removeEnemy(family) {
             currentFamily().removeEnemy(family);
+            availableRelations.push(family);
         }
 
-        function handleRelationChanged(sender, changeFamilyArgs) {
-            if (changeFamilyArgs.action === "added") {
-                availableRelations.remove(changeFamilyArgs.family);
-            }
-            else if (changeFamilyArgs.action === "removed") {
-                availableRelations.push(changeFamilyArgs.family);
-            }
-        }
+        //function handleRelationChanged(sender, changeFamilyArgs) {
+        //    if (changeFamilyArgs.action === "added") {
+        //        availableRelations.remove(changeFamilyArgs.family);
+        //    }
+        //    else if (changeFamilyArgs.action === "removed") {
+        //        availableRelations.push(changeFamilyArgs.family);
+        //    }
+        //}
 
         function populateAvailableRelations(currentFamily) {
             var unselectedRelations = [];
