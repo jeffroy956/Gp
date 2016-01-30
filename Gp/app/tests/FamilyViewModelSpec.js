@@ -368,8 +368,8 @@ describe("FamilyViewModel", function () {
             test.a.familyBuilder()
             .withFamily("beans")
             .withFamily("spinach")
-            .buildKo(),
-            function () {
+            .buildKo())
+        .then(function () {
                 vm.selectFamily(vm.families()[0]);
 
                 expect(ko.unwrap(vm.isDirty)).toBe(false);
@@ -378,5 +378,33 @@ describe("FamilyViewModel", function () {
             });
 
     }, asyncTimeout);
+
+    it("save sends modified family to server", function (done) {
+        var repo = new gp.FamilyRepository();
+
+        var repoPromise = test.a.promiseFake();
+        spyOn(repo, "getAll").and.returnValue(repoPromise.promise);
+
+        var vm = new gp.FamilyViewModel(repo);
+
+        repoPromise.resolveNow(
+            test.a.familyBuilder()
+            .withFamily("beans")
+            .withFamily("spinach")
+            .buildKo())
+        .then(
+            function () {
+                vm.selectFamily(vm.families()[0]);
+                vm.currentFamily().addCompanion("spinach");
+
+                spyOn(repo, "save");
+                vm.saveChanges();
+                expect(repo.save).toHaveBeenCalledWith([vm.families()[0]]);
+
+                done();
+            }
+            );
+    }, asyncTimeout);
+
 
 });

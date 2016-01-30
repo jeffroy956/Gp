@@ -23,12 +23,18 @@
         });
 
         function resolveNow(data, done) {
-            Promise.all([promise])
-                .then(function () {
-                    done();
-                });
+            var promiseAll = Promise.all([promise]);
+
+            if (done) {
+                promiseAll
+                    .then(function () {
+                        done();
+                    });
+            }
 
             resolveHandler(data);
+
+            return promiseAll;
         }
         
         function rejectNow(data, done) {

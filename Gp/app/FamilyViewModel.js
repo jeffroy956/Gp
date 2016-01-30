@@ -90,6 +90,15 @@
             return false;
         }
 
+        function saveChanges() {
+            var modifiedFamilies =
+                ko.utils.arrayFilter(families(), function (family) {
+                    return ko.unwrap(family.isDirty) === true;
+                });
+
+            familyRepository.save(modifiedFamilies);
+        }
+
         var publicApi = {
             families: families,
             currentFamily: currentFamily,
@@ -99,7 +108,8 @@
             removeCompanion, removeCompanion,
             addEnemy: addEnemy,
             removeEnemy: removeEnemy,
-            isDirty: ko.computed(isDirty)
+            isDirty: ko.computed(isDirty),
+            saveChanges: saveChanges
             
         }
 

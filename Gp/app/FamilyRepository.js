@@ -7,11 +7,10 @@
         function getAll() {
             var repoPromise = new Promise(function (resolve, reject) {
                 serverRequest
-                    .sendRequest("GET", apiController)
-                    .then(function (data) {
-                        resolve(mapFamilies(data));
-                    });
-
+                .sendRequest("GET", apiController)
+                .then(function (data) {
+                    resolve(mapFamilies(data));
+                });
             });
 
             return repoPromise;
@@ -27,12 +26,17 @@
         }
 
 
-        function post() {
-
+        function save(families) {
+            serverRequest.sendRequest("POST", apiController, toJSON(families));
         }
 
-        function put() {
-
+        function toJSON(families) {
+            return ko.toJSON(families.map(function (family) {
+                var copy = ko.toJS(family);
+                delete copy.isDirty;
+                delete copy.selected;
+                return copy;
+            }));
         }
 
         function remove(){
@@ -40,7 +44,8 @@
         }
 
         var publicApi = {
-            getAll: getAll
+            getAll: getAll,
+            save: save
         };
 
         return publicApi;

@@ -1,6 +1,8 @@
 ﻿/// <reference path="_references.js" />
 
 describe("FamilyRepository", function () {
+    var asyncTimeout = 100;
+
     it("is globally defined", function () {
         expect(gp.FamilyRepository).toBeDefined();
     });
@@ -15,6 +17,25 @@ describe("FamilyRepository", function () {
 
         expect(request.sendRequest).toHaveBeenCalledWith(
             "GET", "/api/Families");
+    });
+
+    it("saves modified family", function () {
+        var request = new gp.ServerRequest();
+        spyOn(request, "sendRequest").and.returnValue(test.a.promiseStub());
+
+        var repo = new gp.FamilyRepository(request);
+
+        var families = test.a.familyBuilder().withFamily("corn").buildKo();
+
+        repo.save(families);
+
+        expect(request.sendRequest).toHaveBeenCalledWith(
+            "POST", "/api/Families", ko.toJSON([{
+                name: "corn",
+                familyId: 1,
+                companions: [],
+                enemies: []
+            }]));
     });
 
     it("gets all families returns promise", function () {
@@ -54,7 +75,7 @@ describe("FamilyRepository", function () {
         });
 
         successCallback(families);
-    });
+    }, asyncTimeout);
 
     it("maps family with companions", function (done) {
         var request = new gp.ServerRequest();
@@ -84,7 +105,7 @@ describe("FamilyRepository", function () {
 
         successCallback(families);
 
-    });
+    }, asyncTimeout);
 
     it("maps family with enemies", function (done) {
         var request = new gp.ServerRequest();
@@ -114,6 +135,6 @@ describe("FamilyRepository", function () {
 
         successCallback(families);
 
-    });
+    }, asyncTimeout);
 
 });
