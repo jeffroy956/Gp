@@ -6,6 +6,23 @@
     display: flex;
     flex-direction: column;
 }
+
+.family-edit__top-bar {
+    display: flex;
+}
+
+.family-edit__status-message {
+    padding: @standardPadding;
+    flex: 1;
+}
+.family-edit__commands {
+    padding: @standardPadding;
+    flex: 4;
+    button {
+        margin-right: @standardPadding;
+    }
+}
+
 .family-edit__main-content {
     flex: 1;
     display: flex;
@@ -37,6 +54,10 @@
     padding: @doubleStandardPadding;
     border: 1px solid @defaultBorderColor;
     cursor: pointer;
+    &.item--selected {
+        background-color: @highlightedBackgroundColor;
+        border: 1px solid @highlightedBorderColor;
+    }
 }
 
 .family-relation__name {

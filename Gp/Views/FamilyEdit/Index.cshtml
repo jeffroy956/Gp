@@ -3,11 +3,16 @@
 }
 <div class="family-edit__container">
     <div class="family-edit__top-bar">
+        <div class="family-edit__status-message">
+            <span data-bind="visible: isDirty">
+                There are unsaved changes
+            </span>
+        </div>
         <div class="family-edit__commands">
-            <button>
+            <button class="command__save">
                 <span class="icon-floppy"></span>
             </button>
-            <button>
+            <button class="command__cancel">
                 <span class="icon-block"></span>
             </button>
         </div>
@@ -15,8 +20,8 @@
     <div class="family-edit__main-content">
         <div class="family-edit__list-pane">
             <ul class="family-list" data-bind="foreach: families">
-                <li class="family-list__item">
-                    <div class="family-list__item-name" data-bind="text: name, click: $root.selectFamily"></div>
+                <li class="family-list__item" data-bind="click: $root.selectFamily, css: { 'item--selected' : selected }">
+                    <div class="family-list__item-name" data-bind="text: name"></div>
                 </li>
             </ul>
         </div>

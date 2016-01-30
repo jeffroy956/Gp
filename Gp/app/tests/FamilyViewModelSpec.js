@@ -33,6 +33,51 @@ describe("FamilyViewModel", function () {
             });
     }, asyncTimeout);
 
+    it("selecting a family marks it selected", function (done) {
+        var repo = new gp.FamilyRepository();
+        var repoPromise = test.a.promiseFake();
+
+        spyOn(repo, "getAll").and.returnValue(repoPromise.promise);
+
+        var vm = new gp.FamilyViewModel(repo);
+
+        repoPromise.resolveNow(
+            test.a.familyBuilder()
+            .withFamily("beans")
+            .withFamily("spinach")
+            .buildKo(),
+            function () {
+                vm.selectFamily(vm.families()[0]);
+
+                expect(vm.families()[0].selected()).toBe(true);
+
+                done();
+            });
+    }, asyncTimeout);
+
+    it("selecting a another family clears selected() flag for currently selected family", function (done) {
+        var repo = new gp.FamilyRepository();
+        var repoPromise = test.a.promiseFake();
+
+        spyOn(repo, "getAll").and.returnValue(repoPromise.promise);
+
+        var vm = new gp.FamilyViewModel(repo);
+
+        repoPromise.resolveNow(
+            test.a.familyBuilder()
+            .withFamily("beans")
+            .withFamily("spinach")
+            .buildKo(),
+            function () {
+                vm.selectFamily(vm.families()[0]);
+                vm.selectFamily(vm.families()[1]);
+
+                expect(vm.families()[0].selected()).toBe(false);
+
+                done();
+            });
+    }, asyncTimeout);
+
     it("availableRelations for family does not contain self", function (done) {
         var repo = new gp.FamilyRepository();
         var repoPromise = test.a.promiseFake();
@@ -284,6 +329,54 @@ describe("FamilyViewModel", function () {
 
                 done();
             });
+    }, asyncTimeout);
+
+    it("modifying a family indicates viewModel has changes", function (done) {
+        var repo = new gp.FamilyRepository();
+
+        var repoPromise = test.a.promiseFake();
+        spyOn(repo, "getAll").and.returnValue(repoPromise.promise);
+
+        var vm = new gp.FamilyViewModel(repo);
+
+        repoPromise.resolveNow(
+            test.a.familyBuilder()
+            .withFamily("beans")
+            .withFamily("spinach")
+            .buildKo(),
+            function () {
+                vm.selectFamily(vm.families()[0]);
+
+                vm.addEnemy(vm.families()[1]);
+
+                expect(ko.unwrap(vm.isDirty)).toBe(true);
+
+                done();
+            });
+
+    }, asyncTimeout);
+
+    it("viewModel initially indicates no changes", function (done) {
+        var repo = new gp.FamilyRepository();
+
+        var repoPromise = test.a.promiseFake();
+        spyOn(repo, "getAll").and.returnValue(repoPromise.promise);
+
+        var vm = new gp.FamilyViewModel(repo);
+
+        repoPromise.resolveNow(
+            test.a.familyBuilder()
+            .withFamily("beans")
+            .withFamily("spinach")
+            .buildKo(),
+            function () {
+                vm.selectFamily(vm.families()[0]);
+
+                expect(ko.unwrap(vm.isDirty)).toBe(false);
+
+                done();
+            });
+
     }, asyncTimeout);
 
 });

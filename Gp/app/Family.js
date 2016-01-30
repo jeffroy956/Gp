@@ -7,6 +7,8 @@
         var companions = ko.observableArray(dto.companions);
         var enemies = ko.observableArray(dto.enemies);
         var isDirty = ko.observable(false);
+        var selected = ko.observable(false);
+
         var dirtyCheckFields = [name, companions, enemies];
 
         dirtyCheckFields.forEach(function (observable) {
@@ -40,7 +42,8 @@
             removeCompanion: removeCompanion,
             addEnemy: addEnemy,
             removeEnemy: removeEnemy,
-            isDirty: isDirty
+            isDirty: isDirty,
+            selected: selected
         }
 
         return publicApi;

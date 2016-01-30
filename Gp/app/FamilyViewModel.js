@@ -13,6 +13,12 @@
         });
 
         function selectFamily(family) {
+            var current = currentFamily();
+            if (current) {
+                current.selected(false);
+            }
+
+            family.selected(true);
             currentFamily(family);
             populateAvailableRelations(family);
         }
@@ -72,6 +78,18 @@
             });
         }
 
+        function isDirty() {
+            var modifiedFamily = ko.utils.arrayFirst(families(), function (family) {
+                return family.isDirty() === true;
+            });
+
+            if (modifiedFamily) {
+                return true;
+            }
+
+            return false;
+        }
+
         var publicApi = {
             families: families,
             currentFamily: currentFamily,
@@ -80,7 +98,8 @@
             addCompanion: addCompanion,
             removeCompanion, removeCompanion,
             addEnemy: addEnemy,
-            removeEnemy: removeEnemy
+            removeEnemy: removeEnemy,
+            isDirty: ko.computed(isDirty)
             
         }
 
