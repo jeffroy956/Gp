@@ -30,14 +30,41 @@ namespace Gp.Controllers
         }
 
         // GET api/<controller>/5
-        public string Get(int id)
+        public Family Get(int id)
         {
-            return "value";
+            Family rtnFamily;
+            using (SqlUnitOfWork unitOfWork = new SqlUnitOfWork("gp"))
+            {
+                FamilyRepository familyRepo = new FamilyRepository(unitOfWork);
+                rtnFamily = familyRepo.Get(id);
+
+                unitOfWork.Commit();
+            }
+
+            return rtnFamily;
         }
 
         // POST api/<controller>
-        public void Post([FromBody]string value)
+        public void Post([FromBody]List<Family> families)
         {
+            using(SqlUnitOfWork unitOfWork = new SqlUnitOfWork("gp"))
+            {
+                FamilyRepository familyRepo = new FamilyRepository(unitOfWork);
+
+                foreach(Family family in families)
+                {
+                    if (family.FamilyId == null)
+                    {
+                        familyRepo.Insert(family);
+                    }
+                    else
+                    {
+                        familyRepo.Update(family);
+                    }
+                }
+
+                unitOfWork.Commit();
+            }
         }
 
         // PUT api/<controller>/5

@@ -38,6 +38,29 @@ describe("FamilyRepository", function () {
             }]));
     });
 
+    it("saving a family resets its dirty flag", function (done) {
+        var request = new gp.ServerRequest();
+        var promiseFake = test.a.promiseFake();
+        spyOn(request, "sendRequest").and.returnValue(promiseFake.promise);
+
+        var repo = new gp.FamilyRepository(request);
+
+        var families = test.a.familyBuilder()
+            .withFamily("corn")
+            .buildKo();
+
+        families[0].isDirty(true);
+
+        repo.save(families);
+
+        promiseFake.resolveNow({})
+        .then(function () {
+            expect(families[0].isDirty()).toBe(false);
+            done();
+        });
+
+    }, asyncTimeout);
+
     it("gets all families returns promise", function () {
         var request = new gp.ServerRequest();
         spyOn(request, "sendRequest").and.returnValue(test.a.promiseStub());

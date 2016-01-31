@@ -27,7 +27,12 @@
 
 
         function save(families) {
-            serverRequest.sendRequest("POST", apiController, toJSON(families));
+            serverRequest.sendRequest("POST", apiController, toJSON(families))
+            .then(function () {
+                families.forEach(function (family) {
+                    family.isDirty(false);
+                });
+            });
         }
 
         function toJSON(families) {
