@@ -20,7 +20,40 @@ namespace Gp.Data.Sql
 
         public List<Variety> GetAll()
         {
-            return new List<Variety>();
+            List<Variety> varieties = new List<Variety>();
+
+            FamilyRepository familyRepo = new FamilyRepository(_unitOfWork);
+            List<Family> allFamilies = familyRepo.GetAll();
+
+
+            SqlCommand cmd = _unitOfWork.CreateCommand();
+            cmd.CommandType = System.Data.CommandType.Text;
+
+            cmd.CommandText = "Select VarietyId, Name, FamilyId From dbo.tblVarieties";
+
+            using (SqlDataReader r = cmd.ExecuteReader())
+            {
+
+                while (r.Read())
+                {
+                    Variety variety = new Variety()
+                    {
+                        VarietyId = r.GetInt32(0),
+                        Name = r.GetString(1),
+                    };
+
+                    int? familyId = r.GetSafeInt32(2);
+                    if (familyId != null)
+                    {
+                        variety.Family = allFamilies.First(af => af.FamilyId == familyId.Value);
+                    }
+
+                    varieties.Add(variety);
+                }
+
+            };
+
+            return varieties;
         }
 
         public Variety Get(int id)
