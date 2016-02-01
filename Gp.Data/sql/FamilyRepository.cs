@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using Gp.Data.Entities;
 using System.Data.SqlClient;
 using System.Data;
+using Gp.Data.Common;
 
 namespace Gp.Data.Sql
 {
-    public class FamilyRepository
+    public class FamilyRepository : Repository<Family>
     {
         private SqlUnitOfWork _unitOfWork;
         public FamilyRepository(SqlUnitOfWork unitOfWork)
@@ -49,7 +50,7 @@ namespace Gp.Data.Sql
         public void Update(Family family)
         {
             SqlCommand familyCmd = _unitOfWork.CreateCommand();
-            familyCmd.CommandText = "update dbo.tblFamilies Set Name = @Name Where FamilyId = @FamilyId";
+            familyCmd.CommandText = "update dbo.tblFamilies Set Name = @Name, LastModified = GetUtcDate() Where FamilyId = @FamilyId";
             familyCmd.Parameters.AddWithValue("Name", family.Name);
             familyCmd.Parameters.AddWithValue("FamilyId", family.FamilyId.Value);
 

@@ -60,6 +60,7 @@
     <Compile Include="Entities\Variety.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sql\FamilyRepository.cs" />
+    <Compile Include="Common\Repository.cs" />
     <Compile Include="Sql\SqlUnitOfWork.cs" />
     <Compile Include="Sql\VarietyRepository.cs" />
   </ItemGroup>

@@ -57,7 +57,6 @@ namespace Gp.Tests.Integrated
             Assert.AreEqual("Beans, Bush", savedVariety.Family.Name);
         }
 
-        //TODO: getAllTest
         [TestMethod]
         public void GetAll()
         {
@@ -107,6 +106,47 @@ namespace Gp.Tests.Integrated
             Assert.IsTrue(savedVarieties.Any(sv => sv.Name == "Provider" && sv.Family != null && sv.Family.Name == "Beans, Bush"), "contains Provider");
             Assert.IsTrue(savedVarieties.Any(sv => sv.Name == "Purple Globe" && sv.Family != null && sv.Family.Name == "Turnips"), "contains Purple Globe");
             Assert.IsTrue(savedVarieties.Any(sv => sv.Name == "Broccoli" && sv.Family == null), "contains Broccoli");
+        }
+
+        [TestMethod]
+        public void UpdateVariety()
+        {
+            FamilyRepository familyRepo = new FamilyRepository(_unitOfWork);
+
+            Family bushBeans = new Family()
+            {
+                Name = "Beans, Bush"
+            };
+
+            familyRepo.Insert(bushBeans);
+
+            VarietyRepository varietyRepo = new VarietyRepository(_unitOfWork);
+
+            Variety variety = new Variety()
+            {
+                Name = "Provider",
+                Family = bushBeans
+            };
+
+            varietyRepo.Insert(variety);
+
+            Variety savedVariety = varietyRepo.Get(variety.VarietyId.Value);
+
+            Family gmoBeans = new Family()
+            {
+                Name = "gmo beans"
+            };
+            familyRepo.Insert(gmoBeans);
+
+            savedVariety.Name = "Provider especial";
+            savedVariety.Family = gmoBeans;
+
+            varietyRepo.Update(savedVariety);
+
+            Variety updatedVariety = varietyRepo.Get(variety.VarietyId.Value);
+
+            Assert.AreEqual("Provider especial", updatedVariety.Name);
+            Assert.AreEqual("gmo beans", updatedVariety.Family.Name);
         }
     }
 }

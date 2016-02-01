@@ -9,7 +9,7 @@ using Gp.Data.Common;
 
 namespace Gp.Data.Sql
 {
-    public class VarietyRepository
+    public class VarietyRepository : Repository<Variety>
     {
 
         private SqlUnitOfWork _unitOfWork;
@@ -123,7 +123,21 @@ namespace Gp.Data.Sql
 
         public void Update(Variety variety)
         {
+            SqlCommand cmd = _unitOfWork.CreateCommand();
+            cmd.CommandType = System.Data.CommandType.Text;
 
+            cmd.CommandText = "update dbo.tblVarieties Set Name=@Name, FamilyId = @FamilyId, LastModified = GetUtcDate() Where VarietyId = @VarietyId";
+            cmd.Parameters.AddWithValue("@VarietyId", variety.VarietyId.Value);
+            cmd.Parameters.AddWithValue("@Name", variety.Name);
+            if (variety.Family == null)
+            {
+                cmd.Parameters.AddWithValue("@FamilyId", DBNull.Value);
+            }
+            else
+            {
+                cmd.Parameters.AddWithValue("@FamilyId", variety.Family.FamilyId);
+            }
+            cmd.ExecuteNonQuery();
         }
 
     }
