@@ -1,5 +1,5 @@
-﻿using Gp.Data.entities;
-using Gp.Data.sql;
+﻿using Gp.Data.Entities;
+using Gp.Data.Sql;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;

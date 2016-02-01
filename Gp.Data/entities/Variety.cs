@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Gp.Data.Entities
 {
-    internal class FamilyRelation
+    public class Variety
     {
-        public int FamilyId { get; set; }
-        public int RelatedFamilyId { get; set; }
+        public int? VarietyId { get; set; }
+        public string Name { get; set; }
+        public Family Family { get; set; }
     }
 }

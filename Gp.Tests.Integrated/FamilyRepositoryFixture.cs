@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Gp.Data.sql;
-using Gp.Data.entities;
+using Gp.Data.Sql;
+using Gp.Data.Entities;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Collections.Generic;

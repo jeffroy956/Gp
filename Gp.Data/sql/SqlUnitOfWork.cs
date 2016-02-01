@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Gp.Data.sql
+namespace Gp.Data.Sql
 {
     public class SqlUnitOfWork: IDisposable
     {

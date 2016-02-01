@@ -35,4 +35,25 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="RelatedFamilyId" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="3030372a-6fdb-4d19-aa74-2121bd7fd6be" ChangeDateTime="02/01/2016 01:05:20">
+    <Property Name="ElementName" Value="[dbo].[tblPlan].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[tblPlan]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="EventId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="afdabafd-3d2e-4e3b-b00c-f0cf88bb3780" ChangeDateTime="02/01/2016 01:11:04">
+    <Property Name="ElementName" Value="[dbo].[tblPlan].[FamilyId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[tblPlan]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="VarietyId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="e87396cc-a1d2-445d-bee9-f141623ed68c" ChangeDateTime="02/01/2016 01:11:44">
+    <Property Name="ElementName" Value="[dbo].[tblVariety].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[tblVariety]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="VarietyId" />
+  </Operation>
 </Operations>

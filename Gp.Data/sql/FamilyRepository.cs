@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Gp.Data.entities;
+using Gp.Data.Entities;
 using System.Data.SqlClient;
 using System.Data;
 
-namespace Gp.Data.sql
+namespace Gp.Data.Sql
 {
     public class FamilyRepository
     {

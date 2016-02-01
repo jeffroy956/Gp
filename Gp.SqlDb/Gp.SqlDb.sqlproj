@@ -67,6 +67,8 @@
     <Build Include="Tables\tblFamilies.sql" />
     <Build Include="Tables\tblCompanions.sql" />
     <Build Include="Tables\tblEnemies.sql" />
+    <Build Include="Tables\tblPlan.sql" />
+    <Build Include="Tables\tblVarieties.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Gp.SqlDb.refactorlog" />
@@ -74,6 +76,7 @@
   <ItemGroup>
     <None Include="Scripts\fill_tblFamilies.sql" />
     <None Include="Gp.SqlDb.localhost.publish.xml" />
+    <None Include="Gp.SqlDb.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.PostDeployment1.sql" />

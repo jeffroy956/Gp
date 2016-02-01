@@ -54,20 +54,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="entities\Family.cs" />
-    <Compile Include="entities\FamilyRelation.cs" />
+    <Compile Include="Common\DbUtil.cs" />
+    <Compile Include="Entities\Family.cs" />
+    <Compile Include="Entities\FamilyRelation.cs" />
+    <Compile Include="Entities\Variety.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="sql\FamilyRepository.cs" />
-    <Compile Include="sql\SqlUnitOfWork.cs" />
+    <Compile Include="Sql\FamilyRepository.cs" />
+    <Compile Include="Sql\SqlUnitOfWork.cs" />
+    <Compile Include="Sql\VarietyRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="common\" />
-    <Folder Include="dto\" />
-    <Folder Include="ef\" />
-    <Folder Include="mongo\" />
+    <Folder Include="Dto\" />
+    <Folder Include="Mongo\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
