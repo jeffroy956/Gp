@@ -56,4 +56,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="VarietyId" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="4fc729c6-1443-4a16-a6d3-714beb89fd83" ChangeDateTime="02/02/2016 10:37:40">
+    <Property Name="ElementName" Value="[dbo].[tblPlan].[EventId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[tblPlan]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="PlanId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="536809bf-ef0b-417a-a54e-243718cd8dd6" ChangeDateTime="02/02/2016 10:45:20">
+    <Property Name="ElementName" Value="[dbo].[tblCalendar].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[tblCalendar]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CalendarId" />
+  </Operation>
 </Operations>

@@ -54,7 +54,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="CalendarRepositoryFixture.cs" />
     <Compile Include="FamilyRepositoryFixture.cs" />
+    <Compile Include="PlanRepositoryFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VarietyRepositoryFixture.cs" />
   </ItemGroup>

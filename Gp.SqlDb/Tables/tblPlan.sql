@@ -1,9 +1,12 @@
 ﻿CREATE TABLE [dbo].[tblPlan]
 (
-	[EventId] INT NOT NULL PRIMARY KEY, 
+	[PlanId] INT NOT NULL PRIMARY KEY NONCLUSTERED, 
+	[CalendarId] INT NOT NULL,
+	[RecurrenceId] INT NULL,
     [Description] VARCHAR(255) NOT NULL, 
     [VarietyId] INT NULL, 
-    [PlanDate] DATETIMEOFFSET NULL, 
-    [ActualDate] DATETIMEOFFSET NULL, 
-    [Notes] VARCHAR(MAX) NULL
+    [PlanDate] DATETIME NULL, 
+    [ActualDate] DATETIME NULL, 
+    [Notes] VARCHAR(MAX) NULL, 
+    [LastModified] DATETIMEOFFSET NOT NULL DEFAULT getutcdate()
 )
