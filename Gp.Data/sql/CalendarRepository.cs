@@ -31,12 +31,7 @@ namespace Gp.Data.Sql
             {
                 if (r.Read())
                 {
-                    rtnCalendar = new Calendar()
-                    {
-                        CalendarId = r.GetInt32(0),
-                        Description = r.GetString(1),
-                        Year = r.GetInt32(2)
-                    };
+                    rtnCalendar = MapCalendar(r);
                 }
             }
 
@@ -45,7 +40,31 @@ namespace Gp.Data.Sql
 
         public List<Calendar> GetAll()
         {
-            throw new NotImplementedException();
+            List<Calendar> rtnList = new List<Calendar>();
+
+            SqlCommand cmd = _unitOfWork.CreateCommand();
+            cmd.CommandType = System.Data.CommandType.Text;
+
+            cmd.CommandText = "Select CalendarId, Description, Year From dbo.tblCalendar";
+
+            using (SqlDataReader r = cmd.ExecuteReader())
+            {
+                while (r.Read())
+                {
+                    rtnList.Add(MapCalendar(r));
+                }
+            }
+            return rtnList;
+        }
+
+        private static Calendar MapCalendar(SqlDataReader r)
+        {
+            return new Calendar()
+            {
+                CalendarId = r.GetInt32(0),
+                Description = r.GetString(1),
+                Year = r.GetInt32(2)
+            };
         }
 
         public void Insert(Calendar entity)
@@ -75,7 +94,16 @@ namespace Gp.Data.Sql
 
         public void Update(Calendar entity)
         {
-            throw new NotImplementedException();
+            SqlCommand cmd = _unitOfWork.CreateCommand();
+            cmd.CommandType = System.Data.CommandType.Text;
+
+            cmd.CommandText = "update dbo.tblCalendar Set Description = @Description, Year = @Year Where CalendarId = @CalendarId";
+
+            cmd.Parameters.AddWithValue("@CalendarId", entity.CalendarId.Value);
+            cmd.Parameters.AddWithValue("@Description", entity.Description);
+            cmd.Parameters.AddWithValue("@Year", entity.Year);
+
+            cmd.ExecuteNonQuery();
         }
     }
 }
