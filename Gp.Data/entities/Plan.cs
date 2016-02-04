@@ -10,6 +10,8 @@ namespace Gp.Data.Entities
     {
         public int? PlanId { get; set; }
         public string Description { get; set; }
+
+        public Calendar Calendar { get; set; }
         public Variety Variety { get; set; }
         public DateTime PlanDate { get; set; }
         public DateTime ActualDate { get; set; }

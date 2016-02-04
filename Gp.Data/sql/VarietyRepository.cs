@@ -13,17 +13,18 @@ namespace Gp.Data.Sql
     {
 
         private SqlUnitOfWork _unitOfWork;
-        public VarietyRepository(SqlUnitOfWork unitOfWork)
+        private Repository<Family> _familyRepo;
+        public VarietyRepository(SqlUnitOfWork unitOfWork, Repository<Family> familyRepo)
         {
             _unitOfWork = unitOfWork;
+            _familyRepo = familyRepo;
         }
 
         public List<Variety> GetAll()
         {
             List<Variety> varieties = new List<Variety>();
 
-            FamilyRepository familyRepo = new FamilyRepository(_unitOfWork);
-            List<Family> allFamilies = familyRepo.GetAll();
+            List<Family> allFamilies = _familyRepo.GetAll();
 
 
             SqlCommand cmd = _unitOfWork.CreateCommand();
@@ -83,8 +84,7 @@ namespace Gp.Data.Sql
 
             if (familyId != null)
             {
-                FamilyRepository familyRepo = new FamilyRepository(_unitOfWork);
-                rtnFamily.Family = familyRepo.Get(familyId.Value);
+                rtnFamily.Family = _familyRepo.Get(familyId.Value);
             }
 
             return rtnFamily;

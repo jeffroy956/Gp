@@ -4,6 +4,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Gp.Data.Sql;
 using Gp.Data.Entities;
 using System.Collections.Generic;
+using Moq;
+using Gp.Data.Common;
 
 namespace Gp.Tests.Integrated
 {
@@ -12,11 +14,13 @@ namespace Gp.Tests.Integrated
     {
 
         SqlUnitOfWork _unitOfWork;
+        Mock<Repository<Family>> _familyRepoMock;
 
         [TestInitialize]
         public void Setup()
         {
             _unitOfWork = new SqlUnitOfWork("GP");
+            _familyRepoMock = new Mock<Repository<Family>>();
         }
 
         [TestCleanup]
@@ -28,22 +32,21 @@ namespace Gp.Tests.Integrated
         [TestMethod]
         public void InsertNewVariety()
         {
-            FamilyRepository familyRepo = new FamilyRepository(_unitOfWork);
+            VarietyRepository varietyRepo = new VarietyRepository(_unitOfWork, _familyRepoMock.Object);
 
             Family bushBeans = new Family()
             {
+                FamilyId = 1,
                 Name = "Beans, Bush"
             };
-
-            familyRepo.Insert(bushBeans);
-
-            VarietyRepository varietyRepo = new VarietyRepository(_unitOfWork);
-
+                
             Variety variety = new Variety()
             {
                 Name = "Provider",
                 Family = bushBeans
             };
+
+            _familyRepoMock.Setup(fr => fr.Get(1)).Returns(bushBeans);
 
             varietyRepo.Insert(variety);
 
@@ -58,31 +61,29 @@ namespace Gp.Tests.Integrated
         }
 
         [TestMethod]
-        public void GetAll()
+        public void GetAllVarieties()
         {
-            FamilyRepository familyRepo = new FamilyRepository(_unitOfWork);
-
             Family bushBeans = new Family()
             {
+                FamilyId = 1,
                 Name = "Beans, Bush"
             };
 
-            familyRepo.Insert(bushBeans);
-
             Family turnips = new Family()
             {
+                FamilyId = 2,
                 Name = "Turnips"
             };
 
-            familyRepo.Insert(turnips);
-
-            VarietyRepository varietyRepo = new VarietyRepository(_unitOfWork);
+            VarietyRepository varietyRepo = new VarietyRepository(_unitOfWork, _familyRepoMock.Object);
 
             Variety provider = new Variety()
             {
                 Name = "Provider",
                 Family = bushBeans
             };
+
+            _familyRepoMock.Setup(fr => fr.GetAll()).Returns(new List<Family>() { bushBeans, turnips });
 
             varietyRepo.Insert(provider);
 
@@ -111,16 +112,13 @@ namespace Gp.Tests.Integrated
         [TestMethod]
         public void UpdateVariety()
         {
-            FamilyRepository familyRepo = new FamilyRepository(_unitOfWork);
-
             Family bushBeans = new Family()
             {
+                FamilyId = 1,
                 Name = "Beans, Bush"
             };
 
-            familyRepo.Insert(bushBeans);
-
-            VarietyRepository varietyRepo = new VarietyRepository(_unitOfWork);
+            VarietyRepository varietyRepo = new VarietyRepository(_unitOfWork, _familyRepoMock.Object);
 
             Variety variety = new Variety()
             {
@@ -134,14 +132,17 @@ namespace Gp.Tests.Integrated
 
             Family gmoBeans = new Family()
             {
+                FamilyId = 3,
                 Name = "gmo beans"
             };
-            familyRepo.Insert(gmoBeans);
 
             savedVariety.Name = "Provider especial";
             savedVariety.Family = gmoBeans;
 
             varietyRepo.Update(savedVariety);
+
+            _familyRepoMock.Setup(fr => fr.Get(1)).Returns(bushBeans);
+            _familyRepoMock.Setup(fr => fr.Get(3)).Returns(gmoBeans);
 
             Variety updatedVariety = varietyRepo.Get(variety.VarietyId.Value);
 
