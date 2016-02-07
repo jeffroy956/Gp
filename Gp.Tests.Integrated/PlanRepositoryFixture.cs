@@ -60,13 +60,31 @@ namespace Gp.Tests.Integrated
 
             Assert.IsNotNull(plan.PlanId, "PlanId");
 
+            _varietyRepoMock.Setup(vr => vr.Get(1))
+                .Returns(new Variety()
+                {
+                    VarietyId = 1,
+                    Name = "beefsteak",
+                });
+
+            _calendarRepoMock.Setup(cr => cr.Get(1))
+                .Returns(new Calendar()
+                {
+                    CalendarId = 1,
+                    Description = "2016 garden",
+                    Year = 2016
+                });
+
+
             Plan savedPlan = planRepo.Get(plan.PlanId.Value);
 
             Assert.AreEqual(new DateTime(2016, 3, 15), savedPlan.PlanDate);
             Assert.AreEqual("Start tomato seeds", savedPlan.Description);
+            Assert.IsNotNull(savedPlan.Variety, "Variety");
             Assert.AreEqual("beefsteak", savedPlan.Variety.Name);
             Assert.AreEqual("started to early last year", savedPlan.Notes);
             Assert.AreEqual(new DateTime(2016, 3, 16), savedPlan.ActualDate);
+            Assert.IsNotNull(savedPlan.Calendar, "Calendar");
             Assert.AreEqual("2016 garden", savedPlan.Calendar.Description);
 
         }

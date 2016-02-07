@@ -13,8 +13,8 @@ namespace Gp.Data.Entities
 
         public Calendar Calendar { get; set; }
         public Variety Variety { get; set; }
-        public DateTime PlanDate { get; set; }
-        public DateTime ActualDate { get; set; }
+        public DateTime? PlanDate { get; set; }
+        public DateTime? ActualDate { get; set; }
         public string Notes { get; set; }
     }
 }
