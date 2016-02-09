@@ -142,7 +142,29 @@ namespace Gp.Data.Sql
 
         public void Update(Plan entity)
         {
-            throw new NotImplementedException();
+            SqlCommand cmd = _unitOfWork.CreateCommand();
+            cmd.CommandType = System.Data.CommandType.Text;
+
+            cmd.CommandText = "update dbo.tblPlan Set CalendarId = @CalendarId, RecurrenceId = @RecurrenceId, Description = @Description, VarietyId = @VarietyId, PlanDate = @PlanDate, ActualDate = @ActualDate, Notes = @Notes Where PlanId = @PlanId";
+
+            cmd.Parameters.AddWithValue("@PlanId", entity.PlanId);
+            cmd.Parameters.AddWithValue("@CalendarId", entity.Calendar.CalendarId);
+            cmd.Parameters.AddWithValue("@RecurrenceId", DBNull.Value);
+            cmd.Parameters.AddWithValue("@Description", DbUtil.GetDbParamValue(entity.Description));
+            if (entity.Variety != null)
+            {
+                cmd.Parameters.AddWithValue("@VarietyId", entity.Variety.VarietyId);
+            }
+            else
+            {
+                cmd.Parameters.AddWithValue("@VarietyId", DBNull.Value);
+            }
+
+            cmd.Parameters.AddWithValue("@PlanDate", DbUtil.GetDbParamValue(entity.PlanDate));
+            cmd.Parameters.AddWithValue("@ActualDate", DbUtil.GetDbParamValue(entity.ActualDate));
+            cmd.Parameters.AddWithValue("@Notes", entity.Notes);
+
+            cmd.ExecuteNonQuery();
         }
     }
 }
