@@ -164,6 +164,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\FamiliesController.cs" />
     <Compile Include="Controllers\FamilyEditController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -184,6 +185,7 @@
     <Content Include="font\font\fontello.eot" />
     <Content Include="font\font\fontello.ttf" />
     <Content Include="font\font\fontello.woff" />
+    <Content Include="Views\Calendar\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
