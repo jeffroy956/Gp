@@ -160,6 +160,7 @@
     <Content Include="_less\_mixins.less" />
     <Content Include="_less\_layout.less" />
     <Content Include="_less\_controls.less" />
+    <Content Include="_less\_calendar.less" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -186,6 +187,8 @@
     <Content Include="font\font\fontello.ttf" />
     <Content Include="font\font\fontello.woff" />
     <Content Include="Views\Calendar\Index.cshtml" />
+    <Content Include="Views\Calendar\Create.cshtml" />
+    <Content Include="Views\Calendar\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

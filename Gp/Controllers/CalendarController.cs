@@ -13,12 +13,14 @@ namespace Gp.Controllers
         // GET: Calendar
         public ActionResult Index()
         {
-            List<Calendar> allCalendars;
+            IEnumerable<Calendar> allCalendars;
 
             using (SqlUnitOfWork unitOfWork = new SqlUnitOfWork("gp"))
             {
                 CalendarRepository calendarRepo = new CalendarRepository(unitOfWork);
-                allCalendars = calendarRepo.GetAll();
+                allCalendars = calendarRepo.GetAll()
+                    .OrderBy(cal => cal.Year)
+                    .ThenBy(cal => cal.Description);
 
                 unitOfWork.Commit();
             }
@@ -40,40 +42,48 @@ namespace Gp.Controllers
 
         // POST: Calendar/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Calendar calendar)
         {
-            try
+            using (SqlUnitOfWork unitOfWork = new SqlUnitOfWork("gp"))
             {
-                // TODO: Add insert logic here
+                CalendarRepository calendarRepo = new CalendarRepository(unitOfWork);
+                calendarRepo.Insert(calendar);
 
-                return RedirectToAction("Index");
+                unitOfWork.Commit();
             }
-            catch
-            {
-                return View();
-            }
+
+            return RedirectToAction("Index");
         }
 
         // GET: Calendar/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            Calendar editCalendar = null;
+            using (SqlUnitOfWork unitOfWork = new SqlUnitOfWork("gp"))
+            {
+                CalendarRepository calendarRepo = new CalendarRepository(unitOfWork);
+                editCalendar = calendarRepo.Get(id);
+
+                unitOfWork.Commit();
+            }
+
+            return View(editCalendar);
         }
 
         // POST: Calendar/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, Calendar calendar)
         {
-            try
+            calendar.CalendarId = id;
+            using (SqlUnitOfWork unitOfWork = new SqlUnitOfWork("gp"))
             {
-                // TODO: Add update logic here
+                CalendarRepository calendarRepo = new CalendarRepository(unitOfWork);
+                calendarRepo.Update(calendar);
 
-                return RedirectToAction("Index");
+                unitOfWork.Commit();
             }
-            catch
-            {
-                return View();
-            }
+
+            return RedirectToAction("Index");
         }
 
         // GET: Calendar/Delete/5

@@ -1,0 +1,54 @@
+﻿@model Gp.Data.Entities.Calendar
+
+@{
+    ViewBag.Title = "Edit Calendar";
+}
+
+<div class="inner-view__container">
+    <form method="post">
+        @Html.AntiForgeryToken()
+        <div class="form__fields">
+            <div class="form__field-row">
+                <div class="form__field-label">
+                    <label for="year">Year</label>
+                </div>
+                <div class="form__field-input">
+                    <select name="year" class="calendar__year-input">
+                        @for (int year = Model.Year - 5; year < DateTime.Now.AddYears(5).Year; year++)
+                        {
+                            if (year == Model.Year)
+                            {
+                                <option selected="selected">@year</option>
+                            }
+                            else
+                            {
+                                <option>@year</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="form__field-row">
+                <div class="form__field-label">
+                    <label for="description">Description</label>
+                </div>
+                <div class="form__field-input">
+                    <input name="description" placeholder="Calendar description" value="@Model.Description" />
+                </div>
+            </div>
+            <div class="form__field-row">
+                <div class="form__field-label">
+                    &nbsp;
+                </div>
+                <div class="form__field-submit">
+                    <button type="submit"><span class="icon-floppy"></span> Update</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div>
+        <a href="/Calendar">Back to List</a>
+    </div>
+</div>
+
