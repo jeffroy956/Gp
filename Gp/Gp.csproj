@@ -127,6 +127,8 @@
     <Content Include="app\tests\FamilyRepositorySpec.js" />
     <Content Include="app\tests\ServerRequestSpec.js" />
     <Content Include="app\tests\SpecRunner.html" />
+    <Content Include="app\tests\VarietyViewModelSpec.js" />
+    <Content Include="app\VarietyViewModel.js" />
     <Content Include="bower_components\lodash\dist\lodash.js" />
     <Content Include="bower_components\lodash\dist\lodash.min.js" />
     <Content Include="favicon.ico" />
@@ -169,6 +171,7 @@
     <Compile Include="Controllers\FamiliesController.cs" />
     <Compile Include="Controllers\FamilyEditController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\VarietiesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -189,6 +192,8 @@
     <Content Include="Views\Calendar\Index.cshtml" />
     <Content Include="Views\Calendar\Create.cshtml" />
     <Content Include="Views\Calendar\Edit.cshtml" />
+    <Content Include="Views\Varieties\Index.cshtml" />
+    <Content Include="Views\Varieties\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

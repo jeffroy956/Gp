@@ -14,10 +14,24 @@
 }
 
 .listing__container {
+    display: table;
     border-collapse: collapse;
 }
 
+.listing__row {
+    display: table-row;
+}
+
  .listing__cell {
+     display: table-cell;
+     padding: @standardPadding;
+     border: 1px solid @defaultBorderColor;
+ }
+
+ .listing__header {
+     display: table-cell;
+     font-weight: bold;
+     text-align: center;
      padding: @standardPadding;
      border: 1px solid @defaultBorderColor;
  }
