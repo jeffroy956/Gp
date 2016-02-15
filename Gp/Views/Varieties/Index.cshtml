@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "Varieties";
+}
+@model IEnumerable<Variety>
+@helper DisplayRelations(List<Family> relations) { 
+for (int i = 0; i < relations.Count; i++)
+{
+    if (i > 0)
+    {
+            <span>, </span>
+    }
+    <span class="variety__relation">
+        @relations[i].Name
+    </span>
+}
+}
+<div class="inner-view__container">
+    <form method="get" action="/Varieties/Create" class="inner-view__commands">
+        <button type="submit"><span class="icon-plus"></span> New Variety</button>
+    </form>
+    @if (Model == null || !Model.Any())
+    {
+        <div>No varieties added yet</div>
+    }
+    else
+    {
+        <div class="listing__container">
+            <div class="listing__row">
+                <div class="listing__header">Name</div>
+                <div class="listing__header">Family</div>
+                <div class="listing__header">Friends</div>
+                <div class="listing__header">Enemies</div>
+                <div class="listing__header">&nbsp;</div>
+            </div>
+            @foreach (Variety variety in Model)
+            {
+                <div class="listing__row">
+                    <div class="listing__cell">
+                        @variety.Name
+                    </div>
+                    @if (variety.Family != null)
+                    {
+                        <div class="listing__cell">@variety.Family.Name</div>
+                        <div class="listing__cell">@DisplayRelations(variety.Family.Companions)</div>
+                        <div class="listing__cell">@DisplayRelations(variety.Family.Enemies)</div>
+                    }
+                    else
+                    {
+                        <div class="listing__cell">&nbsp;</div>
+                        <div class="listing__cell">&nbsp;</div>
+                        <div class="listing__cell">&nbsp;</div>
+                    }
+                    <div class="listing__cell">
+                        <a href="/Varieties/Edit/@variety.VarietyId"><span class="icon-pencil"></span></a>
+                    </div>
+                </div>
+            }
+
+        </div>
+    }
+    <form method="get" action="/Varieties/Create" class="inner-view__commands">
+        <button type="submit"><span class="icon-plus"></span> New Variety</button>
+    </form>
+</div>

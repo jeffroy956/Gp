@@ -63,6 +63,8 @@ describe("VarietyViewModel", function () {
         vm.selectFamily(families[1]);
 
         expect(vm.family().name).toBe("pole beans");
+        expect(vm.familyId()).toBe(2);
         expect(variety.family.name).toBe("pole beans");
     });
+
 });

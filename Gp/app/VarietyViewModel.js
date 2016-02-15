@@ -23,7 +23,13 @@
         var publicApi = {
             family: family,
             availableFamilies: allFamilies,
-            selectFamily: selectFamily
+            selectFamily: selectFamily,
+            familyId: ko.computed(function () {
+                var currentFamily = family();
+                if (currentFamily) {
+                    return currentFamily.familyId;
+                }
+            })
         }
 
         return publicApi;

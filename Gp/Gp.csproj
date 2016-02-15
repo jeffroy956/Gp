@@ -163,6 +163,7 @@
     <Content Include="_less\_layout.less" />
     <Content Include="_less\_controls.less" />
     <Content Include="_less\_calendar.less" />
+    <Content Include="_less\_forms.less" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />

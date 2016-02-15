@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace Gp.Data.Entities
 {
-    public class Variety
+    public class VarietyEditViewModel
     {
-        public int? VarietyId { get; set; }
-        public string Name { get; set; }
-        public Family Family { get; set; }
-
+        public Variety Variety { get; set; }
+        public IEnumerable<Family> AvailableFamilies { get; set; }
     }
 }
