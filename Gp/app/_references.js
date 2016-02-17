@@ -8,3 +8,4 @@
 /// <reference path="FamilyRepository.js" />
 /// <reference path="FamilyViewModel.js" />
 /// <reference path="VarietyViewModel.js" />
+/// <reference path="PlanRepository.js" />

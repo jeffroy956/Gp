@@ -46,7 +46,7 @@ namespace Gp.Data.Sql
                     int? familyId = r.GetSafeInt32(2);
                     if (familyId != null)
                     {
-                        variety.Family = allFamilies.First(af => af.FamilyId == familyId.Value);
+                        variety.Family = allFamilies.FirstOrDefault(af => af.FamilyId == familyId.Value);
                     }
 
                     varieties.Add(variety);

@@ -3,7 +3,7 @@
 	[PlanId] INT NOT NULL PRIMARY KEY NONCLUSTERED, 
 	[CalendarId] INT NOT NULL,
 	[RecurrenceId] INT NULL,
-    [Description] VARCHAR(255) NOT NULL, 
+    [Event] VARCHAR(255) NOT NULL, 
     [VarietyId] INT NULL, 
     [PlanDate] DATETIME NULL, 
     [ActualDate] DATETIME NULL, 

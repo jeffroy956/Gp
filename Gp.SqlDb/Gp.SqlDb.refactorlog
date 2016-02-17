@@ -70,4 +70,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="CalendarId" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="f2c14d99-e41e-468d-8f3e-07cd1366d8ef" ChangeDateTime="02/17/2016 10:21:10">
+    <Property Name="ElementName" Value="[dbo].[tblPlan].[Description]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[tblPlan]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Event" />
+  </Operation>
 </Operations>

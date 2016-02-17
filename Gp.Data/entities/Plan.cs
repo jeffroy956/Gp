@@ -9,7 +9,7 @@ namespace Gp.Data.Entities
     public class Plan
     {
         public int? PlanId { get; set; }
-        public string Description { get; set; }
+        public string Event { get; set; }
 
         public Calendar Calendar { get; set; }
         public Variety Variety { get; set; }

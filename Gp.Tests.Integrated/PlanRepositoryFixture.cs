@@ -50,7 +50,7 @@ namespace Gp.Tests.Integrated
             Plan plan = new Plan()
             {
                 PlanDate = new DateTime(2016, 3, 15),
-                Description = "Start tomato seeds",
+                Event = "Start tomato seeds",
                 Variety = beefsteak,
                 Notes = "started to early last year",
                 ActualDate = new DateTime(2016, 3, 16),
@@ -71,7 +71,7 @@ namespace Gp.Tests.Integrated
             Plan savedPlan = planRepo.Get(plan.PlanId.Value);
 
             Assert.AreEqual(new DateTime(2016, 3, 15), savedPlan.PlanDate);
-            Assert.AreEqual("Start tomato seeds", savedPlan.Description);
+            Assert.AreEqual("Start tomato seeds", savedPlan.Event);
             Assert.IsNotNull(savedPlan.Variety, "Variety");
             Assert.AreEqual("beefsteak", savedPlan.Variety.Name);
             Assert.AreEqual("started to early last year", savedPlan.Notes);
@@ -114,7 +114,7 @@ namespace Gp.Tests.Integrated
             Plan plan = new Plan()
             {
                 PlanDate = new DateTime(2016, 3, 15),
-                Description = "Start tomato seeds",
+                Event = "Start tomato seeds",
                 Variety = beefsteak,
                 Notes = "started to early last year",
                 ActualDate = new DateTime(2016, 3, 16),
@@ -137,7 +137,7 @@ namespace Gp.Tests.Integrated
 
             Plan savedPlan = planRepo.Get(plan.PlanId.Value);
 
-            savedPlan.Description = "new description";
+            savedPlan.Event = "new description";
             savedPlan.PlanDate = new DateTime(2016, 3, 23);
             savedPlan.ActualDate = new DateTime(2016, 3, 24);
             savedPlan.Notes = "new notes";
@@ -149,7 +149,7 @@ namespace Gp.Tests.Integrated
             Plan updatedPlan = planRepo.Get(plan.PlanId.Value);
 
             Assert.AreEqual(new DateTime(2016, 3, 23), updatedPlan.PlanDate);
-            Assert.AreEqual("new description", updatedPlan.Description);
+            Assert.AreEqual("new description", updatedPlan.Event);
             Assert.AreEqual("plum", updatedPlan.Variety.Name);
             Assert.AreEqual("new notes", updatedPlan.Notes);
             Assert.AreEqual(new DateTime(2016, 3, 24), updatedPlan.ActualDate);

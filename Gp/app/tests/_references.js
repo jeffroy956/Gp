@@ -8,4 +8,6 @@
 /// <reference path="/Scripts/jasmine-2.4.1/boot.js" />
 /// <reference path="builders/a.js" />
 /// <reference path="builders/FamilyBuilder.js" />
+/// <reference path="builders/PlanBuilder.js" />
 /// <reference path="../VarietyViewModel.js" />
+/// <reference path="../PlanRepository.js" />
