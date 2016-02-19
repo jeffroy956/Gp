@@ -29,7 +29,7 @@ namespace Gp.Data.Sql
             SqlCommand cmd = _unitOfWork.CreateCommand();
             cmd.CommandType = System.Data.CommandType.Text;
 
-            cmd.CommandText = "Select PlanId, CalendarId, RecurrenceId, Event, VarietyId, PlanDate, ActualDate, Notes From dbo.tblPlan Where PlanId = @PlanId";
+            cmd.CommandText = "Select PlanId, CalendarId, RecurrenceId, EventDescription, VarietyId, PlanDate, ActualDate, Notes From dbo.tblPlan Where PlanId = @PlanId";
             cmd.Parameters.AddWithValue("@PlanId", id);
 
             using (SqlDataReader r = cmd.ExecuteReader())
@@ -55,7 +55,7 @@ namespace Gp.Data.Sql
             private int idxPlanId;
             private int idxCalendarId;
             private int idxRecurrenceId;
-            private int idxEvent;
+            private int idxEventDescription;
             private int idxVarietyId;
             private int idxPlanDate;
             private int idxActualDate;
@@ -73,7 +73,7 @@ namespace Gp.Data.Sql
                 idxPlanId = r.GetOrdinal("PlanId");
                 idxCalendarId = r.GetOrdinal("CalendarId");
                 idxRecurrenceId = r.GetOrdinal("RecurrenceId");
-                idxEvent = r.GetOrdinal("Event");
+                idxEventDescription = r.GetOrdinal("EventDescription");
                 idxVarietyId = r.GetOrdinal("VarietyId");
                 idxPlanDate = r.GetOrdinal("PlanDate");
                 idxActualDate = r.GetOrdinal("ActualDate");
@@ -85,7 +85,7 @@ namespace Gp.Data.Sql
                 Plan plan = new Plan()
                 {
                     PlanId = r.GetInt32(idxPlanId),
-                    Event = r.GetString(idxEvent),
+                    EventDescription = r.GetString(idxEventDescription),
                     PlanDate = r.GetSafeDateTime(idxPlanDate),
                     ActualDate = r.GetSafeDateTime(idxActualDate),
                     Notes = r.GetSafeString(idxNotes)
@@ -107,13 +107,13 @@ namespace Gp.Data.Sql
             SqlCommand cmd = _unitOfWork.CreateCommand();
             cmd.CommandType = System.Data.CommandType.Text;
 
-            cmd.CommandText = "insert into dbo.tblPlan(PlanId, CalendarId, RecurrenceId, Event, VarietyId, PlanDate, ActualDate, Notes) values(@PlanId, @CalendarId, @RecurrenceId, @Event, @VarietyId, @PlanDate, @ActualDate, @Notes)";
+            cmd.CommandText = "insert into dbo.tblPlan(PlanId, CalendarId, RecurrenceId, EventDescription, VarietyId, PlanDate, ActualDate, Notes) values(@PlanId, @CalendarId, @RecurrenceId, @EventDescription, @VarietyId, @PlanDate, @ActualDate, @Notes)";
             int planId = GetNextPlanId();
 
             cmd.Parameters.AddWithValue("@PlanId", planId);
             cmd.Parameters.AddWithValue("@CalendarId", entity.Calendar.CalendarId);
             cmd.Parameters.AddWithValue("@RecurrenceId", DBNull.Value);
-            cmd.Parameters.AddWithValue("@Event", DbUtil.GetDbParamValue(entity.Event));
+            cmd.Parameters.AddWithValue("@EventDescription", DbUtil.GetDbParamValue(entity.EventDescription));
             if (entity.Variety != null)
             {
                 cmd.Parameters.AddWithValue("@VarietyId", entity.Variety.VarietyId);
@@ -145,12 +145,12 @@ namespace Gp.Data.Sql
             SqlCommand cmd = _unitOfWork.CreateCommand();
             cmd.CommandType = System.Data.CommandType.Text;
 
-            cmd.CommandText = "update dbo.tblPlan Set CalendarId = @CalendarId, RecurrenceId = @RecurrenceId, Event = @Event, VarietyId = @VarietyId, PlanDate = @PlanDate, ActualDate = @ActualDate, Notes = @Notes Where PlanId = @PlanId";
+            cmd.CommandText = "update dbo.tblPlan Set CalendarId = @CalendarId, RecurrenceId = @RecurrenceId, EventDescription = @EventDescription, VarietyId = @VarietyId, PlanDate = @PlanDate, ActualDate = @ActualDate, Notes = @Notes Where PlanId = @PlanId";
 
             cmd.Parameters.AddWithValue("@PlanId", entity.PlanId);
             cmd.Parameters.AddWithValue("@CalendarId", entity.Calendar.CalendarId);
             cmd.Parameters.AddWithValue("@RecurrenceId", DBNull.Value);
-            cmd.Parameters.AddWithValue("@Event", DbUtil.GetDbParamValue(entity.Event));
+            cmd.Parameters.AddWithValue("@EventDescription", DbUtil.GetDbParamValue(entity.EventDescription));
             if (entity.Variety != null)
             {
                 cmd.Parameters.AddWithValue("@VarietyId", entity.Variety.VarietyId);

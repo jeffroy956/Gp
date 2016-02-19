@@ -28,7 +28,8 @@
         }
     }
 
-    test.PlanBuilder = function () {
+    test.a = test.a || {};
+    test.a.planBuilder = function () {
         return new PlanBuilder();
     };
 

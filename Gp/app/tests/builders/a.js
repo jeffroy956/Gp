@@ -1,14 +1,7 @@
 ﻿/// <reference path="../_references.js" />
 (function (test) {
     "use strict";
-    function a() {
-
-        this.familyBuilder = function () {
-            return new test.FamilyBuilder();
-        }
-    }
-
-    test.a = new a();
+    test.a = test.a || {};
 
     test.a.promiseStub = function () {
         return new Promise(function (resolve, reject) {
@@ -53,6 +46,29 @@
             rejectNow: rejectNow,
             promise: promise
         }
+    }
+
+    test.a.defaultCalendars = function () {
+        return [
+            {
+                calendarId: 2,
+                description: "2016 Calendar"
+            },
+            {
+                calendarId: 1,
+                description: "2015 Calendar"
+            },
+        ];
+    };
+
+    test.a.serverRequestStub = function () {
+        function sendRequest(verb, url, data) {
+            return test.a.promiseStub();
+        }
+
+        return {
+            sendRequest: sendRequest
+        };
     }
 
 })(window.test = window.test || {});

@@ -5,14 +5,7 @@
         var apiController = "/api/Plans";
 
         function getCalendarPlans(calendarId) {
-            var repoPromise = new Promise(function (resolve, reject) {
-                serverRequest
-                .sendRequest("GET", apiController + "/Calendar/" + calendarId)
-                .then(function (data) {
-                //    resolve(mapFamilies(data));
-                });
-            });
-            return repoPromise;
+            return serverRequest.sendRequest("GET", apiController + "/Calendar/" + calendarId);
         }
 
         var publicApi = {

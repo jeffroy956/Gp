@@ -11,3 +11,4 @@
 /// <reference path="builders/PlanBuilder.js" />
 /// <reference path="../VarietyViewModel.js" />
 /// <reference path="../PlanRepository.js" />
+/// <reference path="../PlanViewModel.js" />

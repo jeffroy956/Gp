@@ -3,13 +3,6 @@
     "use strict";
 
     function ServerRequest() {
-        function get(url, data) {
-            return sendRequest("GET", url, data);
-        }
-
-        function post(url, data) {
-            return sendRequest("POST", url, data);
-        }
 
         function sendRequest(verb, url, data) {
             var promise = new Promise(function (resolve, reject) {
@@ -38,8 +31,6 @@
         }
 
         var publicApi = {
-            get: get,
-            post: post,
             sendRequest: sendRequest
         };
 

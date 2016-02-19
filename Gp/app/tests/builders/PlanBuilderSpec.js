@@ -1,7 +1,7 @@
 ﻿/// <reference path="../_references.js" />
 describe("PlanBuilder", function () {
     it("is globally defined", function () {
-        expect(test.PlanBuilder).toBeDefined();
+        expect(test.a.planBuilder).toBeDefined();
     });
 
     it("creates a plan entry", function () {
@@ -10,7 +10,7 @@ describe("PlanBuilder", function () {
             name: "lettuce"
         };
         
-        var plan = test.PlanBuilder()
+        var plan = test.a.planBuilder()
         .withEventDescription("Start tomato seeds")
         .withVariety({
             varietyId: 1,

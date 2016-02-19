@@ -72,6 +72,9 @@
         }
     }
 
-    test.FamilyBuilder = FamilyBuilder;
+    test.a = test.a || {};
+    test.a.familyBuilder = function () {
+        return new FamilyBuilder();
+    };
 
 })(window.test = window.test || {}, gp, _);

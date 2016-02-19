@@ -1,7 +1,7 @@
 ﻿/// <reference path="../_references.js" />
 describe("FamilyBuilder", function () {
     it("is globally defined", function () {
-        expect(test.FamilyBuilder).toBeDefined();
+        expect(test.a.familyBuilder).toBeDefined();
     });
 
     it("creates a family", function () {
@@ -10,9 +10,7 @@ describe("FamilyBuilder", function () {
             name: "lettuce"
         };
 
-        var familyBuilder = new test.FamilyBuilder();
-
-        expect(familyBuilder.withFamilyObject(family).build()).toEqual([{
+        expect(test.a.familyBuilder().withFamilyObject(family).build()).toEqual([{
             familyId: 1,
             name: "lettuce"
         }]);

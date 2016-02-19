@@ -22,20 +22,28 @@ describe("PlanRepository", function () {
         expect(promise.then).toBeDefined();
     });
 
-    it("maps events into an observable collection", function () {
+    it("returns a list of plans for calendar from server", function (done) {
         var request = new gp.ServerRequest();
         var serverPromise = test.a.promiseFake();
-        spyOn(request, "sendRequest").and.returnValue(serverPromise);
+        spyOn(request, "sendRequest").and.returnValue(serverPromise.promise);
 
         var repo = new gp.PlanRepository(request);
 
         var promise = repo.getCalendarPlans(2);
 
-        serverPromise.resolveNow()
-        .then(function () {
-
+        promise.then(function (data) {
+            expect(data).toBeDefined();
+            if (data) {
+                expect(data.length).toBe(1);
+            }
+            done();
         });
-    });
+
+        var planListDto = [];
+        planListDto.push(test.a.planBuilder().withEventDescription("Plant onions").build());
+
+        serverPromise.resolveNow(planListDto);
+    }, asyncTimeout);
 
     xit("maps family with enemies", function (done) {
         var request = new gp.ServerRequest();

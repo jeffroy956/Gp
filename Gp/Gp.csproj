@@ -115,6 +115,7 @@
     <Content Include="app\Family.js" />
     <Content Include="app\FamilyViewModel.js" />
     <Content Include="app\FamilyRepository.js" />
+    <Content Include="app\PlanViewModel.js" />
     <Content Include="app\PlanRepository.js" />
     <Content Include="app\ServerRequest.js" />
     <None Include="app\_references.js" />
@@ -128,6 +129,7 @@
     <Content Include="app\tests\FamilySpec.js" />
     <Content Include="app\tests\FamilyViewModelSpec.js" />
     <Content Include="app\tests\FamilyRepositorySpec.js" />
+    <Content Include="app\tests\PlanViewModelSpec.js" />
     <Content Include="app\tests\PlanRepositorySpec.js" />
     <Content Include="app\tests\ServerRequestSpec.js" />
     <Content Include="app\tests\SpecRunner.html" />
