@@ -2,7 +2,7 @@
 (function (test, gp, _) {
     "use strict";
     function PlanBuilder() {
-        var _eventDescription, _variety, _planDate;
+        var _eventDescription, _variety, _planDate, _actualDate;
         
         this.withEventDescription = function (description) {
             _eventDescription = description;
@@ -19,11 +19,17 @@
             return this;
         }
 
+        this.withActualDate = function (actualDate) {
+            _actualDate = actualDate;
+            return this;
+        }
+
         this.build = function () {
             return {
                 eventDescription: _eventDescription,
                 variety: _variety,
-                planDate: _planDate
+                planDate: _planDate,
+                actualDate: _actualDate
             };
         }
     }

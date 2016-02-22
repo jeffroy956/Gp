@@ -12,3 +12,5 @@
 /// <reference path="../VarietyViewModel.js" />
 /// <reference path="../PlanRepository.js" />
 /// <reference path="../PlanViewModel.js" />
+/// <reference path="../ObjectMapper.js" />
+/// <reference path="../PlanDetail.js" />

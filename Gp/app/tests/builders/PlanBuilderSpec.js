@@ -17,6 +17,7 @@ describe("PlanBuilder", function () {
             name: "tomato"
         })
         .withPlanDate("2/5/2016")
+        .withActualDate("2/6/2016")
         .build();
 
         expect(plan).toEqual({
@@ -25,7 +26,8 @@ describe("PlanBuilder", function () {
                 varietyId: 1,
                 name: "tomato"
             },
-            planDate: "2/5/2016"
+            planDate: "2/5/2016",
+            actualDate: "2/6/2016"
         });
     });
 
