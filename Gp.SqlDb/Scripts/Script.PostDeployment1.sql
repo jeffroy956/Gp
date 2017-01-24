@@ -11,3 +11,4 @@ Post-Deployment Script Template
 */
 
 :r .\fill_tblFamilies.sql
+:r .\seed_tblPlan.sql
