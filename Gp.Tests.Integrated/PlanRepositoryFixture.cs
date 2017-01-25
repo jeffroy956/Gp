@@ -32,7 +32,7 @@ namespace Gp.Tests.Integrated
         [TestMethod]
         public void SaveNewPlan()
         {
-            PlanRepository planRepo = new PlanRepository(_unitOfWork, _calendarRepoMock.Object, _varietyRepoMock.Object);
+            SqlPlanRepository planRepo = new SqlPlanRepository(_unitOfWork, _calendarRepoMock.Object, _varietyRepoMock.Object);
 
             Variety beefsteak = new Variety()
             {
@@ -83,7 +83,7 @@ namespace Gp.Tests.Integrated
         [TestMethod]
         public void UpdatePlan()
         {
-            PlanRepository planRepo = new PlanRepository(_unitOfWork, _calendarRepoMock.Object, _varietyRepoMock.Object);
+            SqlPlanRepository planRepo = new SqlPlanRepository(_unitOfWork, _calendarRepoMock.Object, _varietyRepoMock.Object);
 
             Variety beefsteak = new Variety()
             {

@@ -9,40 +9,15 @@ using System.Threading.Tasks;
 
 namespace Gp.Data.Sql
 {
-    public class PlanRepository : Repository<Plan>
+    public class SqlPlanRepository
     {
-        private SqlUnitOfWork _unitOfWork;
-        private Repository<Calendar> _calendarRepository;
-        private Repository<Variety> _varietyRepository;
 
-        public PlanRepository(SqlUnitOfWork unitOfWork, Repository<Calendar> calendarRepository, Repository<Variety> varietyRepository)
+
+        private SqlUnitOfWork _unitOfWork;
+
+        public SqlPlanRepository(SqlUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            _calendarRepository = calendarRepository;
-            _varietyRepository = varietyRepository;
-        }
-
-        public Plan Get(int id)
-        {
-            Plan rtnPlan = null;
-
-            SqlCommand cmd = _unitOfWork.CreateCommand();
-            cmd.CommandType = System.Data.CommandType.Text;
-
-            cmd.CommandText = "Select PlanId, CalendarId, RecurrenceId, EventDescription, VarietyId, PlanDate, ActualDate, Notes From dbo.tblPlan Where PlanId = @PlanId";
-            cmd.Parameters.AddWithValue("@PlanId", id);
-
-            using (SqlDataReader r = cmd.ExecuteReader())
-            {
-                if (r.Read())
-                {
-                    PlanMapper mapper = new PlanMapper(r, _calendarRepository, _varietyRepository);
-
-                    rtnPlan = mapper.Map();
-                }
-            }
-
-            return rtnPlan;
         }
 
         public List<Plan> GetAll()
@@ -88,7 +63,8 @@ namespace Gp.Data.Sql
                     EventDescription = r.GetString(idxEventDescription),
                     PlanDate = r.GetSafeDateTime(idxPlanDate),
                     ActualDate = r.GetSafeDateTime(idxActualDate),
-                    Notes = r.GetSafeString(idxNotes)
+                    Notes = r.GetSafeString(idxNotes),
+                    r.GetDecimal
                 };
 
                 plan.Calendar = calendarRepository.Get(r.GetInt32(idxCalendarId));

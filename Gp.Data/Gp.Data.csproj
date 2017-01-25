@@ -70,7 +70,7 @@
     <Compile Include="Sql\CalendarRepository.cs" />
     <Compile Include="Sql\FamilyRepository.cs" />
     <Compile Include="Common\Repository.cs" />
-    <Compile Include="Sql\PlanRepository.cs" />
+    <Compile Include="Sql\SqlPlanRepository.cs" />
     <Compile Include="Sql\SqlUnitOfWork.cs" />
     <Compile Include="Sql\VarietyRepository.cs" />
   </ItemGroup>
