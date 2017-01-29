@@ -1,4 +1,5 @@
-﻿using GpCore.Model.Domain;
+﻿using GpCore.Model.Common;
+using GpCore.Model.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,8 +9,8 @@ namespace GpCore.Model.Repositories
 {
     public interface VarietyRepository
     {
-        Variety Get(Guid varietyId);
+        Variety Get(EntityId id);
 
-        void Insert(Variety variety);
+        void Save(Variety variety);
     }
 }

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GpCore.Model.Domain;
+using GpCore.Model.Common;
+using System.Data.SqlClient;
 
 namespace GpCore.Model.Sql
 {
@@ -17,13 +19,43 @@ namespace GpCore.Model.Sql
             _unitOfWork = unitOfWork;
         }
 
-        public Variety Get(Guid varietyId)
+        public Variety Get(EntityId id)
         {
-            throw new NotImplementedException();
+            Variety variety = null;
+            SqlCommand cmd = _unitOfWork.CreateCommand();
+            cmd.CommandText = "Select VarietyId, Name, CreateDate From dbo.Varieties Where VarietyId = @VarietyId";
+            cmd.Parameters.AddWithValue("@VarietyId", id.Id);
+
+            using (SqlDataReader infoReader = cmd.ExecuteReader())
+            {
+                if (infoReader.Read())
+                {
+                    int idxVarietyId = infoReader.GetOrdinal("VarietyId");
+                    int idxName = infoReader.GetOrdinal("Name");
+                    int idxCreateDate = infoReader.GetOrdinal("CreateDate");
+
+                    variety = new Variety(
+                        EntityId.ForExistingEntity(infoReader.GetGuid(idxVarietyId),
+                        infoReader.GetDateTimeOffset(idxCreateDate).DateTime),
+                        infoReader.GetString(idxName));
+                }
+            }
+
+            return variety;
         }
-        public void Insert(Variety variety)
+
+        public void Save(Variety variety)
         {
-            throw new NotImplementedException();
+            SqlCommand cmd = _unitOfWork.CreateCommand();
+
+            cmd.CommandText = "insert into dbo.Varieties(VarietyId, Name, CreateDate) values(@VarietyId, @Name, @CreateDate)";
+            cmd.Parameters.AddWithValue("@VarietyId", variety.Id.Id);
+            cmd.Parameters.AddWithValue("@Name", variety.Name);
+            cmd.Parameters.AddWithValue("@CreateDate", variety.Id.CreateDate);
+
+            cmd.ExecuteNonQuery();
+
+            variety.Id.AcceptChanges();
         }
     }
 }

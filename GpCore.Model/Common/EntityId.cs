@@ -7,7 +7,7 @@ namespace GpCore.Model.Common
 {
     public class EntityId
     {
-        public EntityId(Guid id, DateTime createDate)
+        private EntityId(Guid id, DateTime createDate)
         {
             Id = id;
             CreateDate = createDate;
@@ -26,9 +26,14 @@ namespace GpCore.Model.Common
             };
         }
 
-        public void IsNowPersisted()
+        public void AcceptChanges()
         {
             IsNew = false;
+        }
+
+        public static EntityId ForExistingEntity(Guid guid, DateTime utcNow)
+        {
+            return new EntityId(guid, utcNow);
         }
     }
 }

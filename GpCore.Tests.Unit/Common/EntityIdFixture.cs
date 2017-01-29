@@ -36,14 +36,23 @@ namespace GpCore.Tests.Unit.Common
         }
 
         [Fact]
-        public void IsNowPersistedClearsNewFlag()
+        public void AcceptChangesClearsNewFlag()
         {
             EntityId id = EntityId.ForNewEntity();
 
-            id.IsNowPersisted();
+            id.AcceptChanges();
 
             Assert.False(id.IsNew);
+        }
 
+        [Fact]
+        public void CreateEntityIdForExistingEntity()
+        {
+            EntityId id = EntityId.ForExistingEntity(Guid.NewGuid(), DateTime.UtcNow);
+
+            Assert.NotNull(id);
+            Assert.NotEqual(Guid.Empty, id.Id);
+            Assert.NotEqual(DateTime.MinValue, id.CreateDate);
         }
     }
 }

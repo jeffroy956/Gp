@@ -14,7 +14,6 @@ namespace GpCore.Tests.Integrated.SqlRepositories
 
         public BaseSqlRepositoryFixture()
         {
-
             UnitOfWork = new SqlUnitOfWork(ConfigManager.AppSettings.GetConnectionString("gp"));
         }
         public void Dispose()
