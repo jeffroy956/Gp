@@ -12,7 +12,7 @@ namespace GpCore.Tests.Integrated.Common
         [Fact]
         public void GetGpConnectionString()
         {
-            Assert.Equal("Data Source=localhost\\sqlexpress;Database=GP_Test;Integrated Security=True;",
+            Assert.Equal("Data Source=localhost\\sql2016;Database=GP_Test;Integrated Security=True;",
                 ConfigManager.AppSettings.GetConnectionString("gp"));
         }
     }

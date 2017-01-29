@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GpCore.Model.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,6 +13,9 @@ namespace GpCore.Tests.Integrated.SqlRepositories
         [Fact]
         public void SaveVariety()
         {
+            Variety newVariety = new Variety("plum tomatoes");
+
+
             Assert.True(true);
         }
 

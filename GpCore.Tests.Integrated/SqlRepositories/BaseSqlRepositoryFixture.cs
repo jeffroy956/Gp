@@ -1,4 +1,6 @@
 ﻿using GpCore.Model.Sql;
+using GpCore.Tests.Integrated.Common;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +14,12 @@ namespace GpCore.Tests.Integrated.SqlRepositories
 
         public BaseSqlRepositoryFixture()
         {
-            //UnitOfWork = new SqlUnitOfWork("GP");
+
+            UnitOfWork = new SqlUnitOfWork(ConfigManager.AppSettings.GetConnectionString("gp"));
         }
         public void Dispose()
         {
-            //UnitOfWork.Dispose();
+            UnitOfWork.Dispose();
         }
 
     }
