@@ -5,13 +5,14 @@ using System.Threading.Tasks;
 
 namespace GpCore.Model.Common
 {
-    public abstract class Entity
+    public class Entity
     {
         public Entity(EntityId id)
         {
-
+            Id = id;
         }
 
+        public EntityId Id { get; private set; }
 
     }
 }

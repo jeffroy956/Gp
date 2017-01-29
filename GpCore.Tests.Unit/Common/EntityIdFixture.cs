@@ -12,7 +12,7 @@ namespace GpCore.Tests.Unit.Common
         [Fact]
         public void CreateNewIdInitializesGuid()
         {
-            EntityId id = EntityId.NewId();
+            EntityId id = EntityId.ForNewEntity();
 
             Assert.NotNull(id);
             Assert.NotEqual(Guid.Empty, id.Id);
@@ -21,7 +21,7 @@ namespace GpCore.Tests.Unit.Common
         [Fact]
         public void CreateNewIdSetsCreationTimeStamp()
         {
-            EntityId id = EntityId.NewId();
+            EntityId id = EntityId.ForNewEntity();
 
             Assert.NotEqual(DateTime.MinValue, id.CreateDate);
             Assert.Equal(DateTimeKind.Utc, id.CreateDate.Kind);
@@ -30,7 +30,7 @@ namespace GpCore.Tests.Unit.Common
         [Fact]
         public void CreateNewIdSetsIsNewFlag()
         {
-            EntityId id = EntityId.NewId();
+            EntityId id = EntityId.ForNewEntity();
 
             Assert.True(id.IsNew);
         }
@@ -38,7 +38,7 @@ namespace GpCore.Tests.Unit.Common
         [Fact]
         public void IsNowPersistedClearsNewFlag()
         {
-            EntityId id = EntityId.NewId();
+            EntityId id = EntityId.ForNewEntity();
 
             id.IsNowPersisted();
 

@@ -1,4 +1,4 @@
-﻿{
+{
   "version": "1.0.0-*",
   "buildOptions": {
     "debugType": "portable"
@@ -8,7 +8,8 @@
     "xunit": "2.1.0",
     "dotnet-test-xunit": "1.0.0-rc2-build10025",
     "GpCore.Model": "1.0.0-*",
-    "xunit.runner.visualstudio": "2.1.0"
+    "xunit.runner.visualstudio": "2.1.0",
+    "moq.netcore": "4.4.0-beta8"
   },
   "testRunner": "xunit",
   "tools": {

@@ -18,7 +18,7 @@ namespace GpCore.Model.Common
 
         public bool IsNew { get; private set; }
 
-        public static EntityId NewId()
+        public static EntityId ForNewEntity()
         {
             return new EntityId(Guid.NewGuid(), DateTime.UtcNow)
             {
