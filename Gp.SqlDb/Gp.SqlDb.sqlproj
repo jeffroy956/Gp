@@ -80,6 +80,7 @@
     <None Include="Scripts\fill_tblFamilies.sql" />
     <None Include="Gp.SqlDb.publish.xml" />
     <None Include="Scripts\GenerateDataColumns.sql" />
+    <None Include="Gp.SqlDb_Test.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.PostDeployment1.sql" />

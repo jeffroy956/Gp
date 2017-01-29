@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gp.Data", "Gp.Data\Gp.Data.csproj", "{AE6480B0-B8F4-42E5-8FC5-FFFD78949F7E}"
 EndProject
@@ -12,6 +12,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gp", "Gp\Gp.csproj", "{319F088E-4870-4D8D-BE0A-E02F91AAFFF4}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Gp.SqlDb", "Gp.SqlDb\Gp.SqlDb.sqlproj", "{A3F8C28C-D860-4BE7-9565-1152D33563FE}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "GpCore", "GpCore\GpCore.xproj", "{12C6C569-79E7-48A2-BE6F-BD40F7221231}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "GpCore.Model", "GpCore.Model\GpCore.Model.xproj", "{1BB8EC92-625D-490A-B89D-12A4F0318B5C}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "GpCore.Tests.Integrated", "GpCore.Tests.Integrated\GpCore.Tests.Integrated.xproj", "{C7E3821A-E154-4F09-9A0E-50BD85A9633D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +47,18 @@ Global
 		{A3F8C28C-D860-4BE7-9565-1152D33563FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3F8C28C-D860-4BE7-9565-1152D33563FE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A3F8C28C-D860-4BE7-9565-1152D33563FE}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{12C6C569-79E7-48A2-BE6F-BD40F7221231}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12C6C569-79E7-48A2-BE6F-BD40F7221231}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12C6C569-79E7-48A2-BE6F-BD40F7221231}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12C6C569-79E7-48A2-BE6F-BD40F7221231}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BB8EC92-625D-490A-B89D-12A4F0318B5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BB8EC92-625D-490A-B89D-12A4F0318B5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BB8EC92-625D-490A-B89D-12A4F0318B5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BB8EC92-625D-490A-B89D-12A4F0318B5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7E3821A-E154-4F09-9A0E-50BD85A9633D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7E3821A-E154-4F09-9A0E-50BD85A9633D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7E3821A-E154-4F09-9A0E-50BD85A9633D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7E3821A-E154-4F09-9A0E-50BD85A9633D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

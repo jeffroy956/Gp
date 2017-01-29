@@ -72,7 +72,7 @@
     <Compile Include="Common\Repository.cs" />
     <Compile Include="Sql\SqlPlanRepository.cs" />
     <Compile Include="Sql\SqlUnitOfWork.cs" />
-    <Compile Include="Sql\VarietyRepository.cs" />
+    <Compile Include="Common\UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

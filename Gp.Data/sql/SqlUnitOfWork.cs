@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Gp.Data.Common;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Gp.Data.Sql
 {
-    public class SqlUnitOfWork: IDisposable
+    public class SqlUnitOfWork : IDisposable, UnitOfWork
     {
         private SqlConnection _unitOfWork;
         private SqlTransaction _uowTransaction;
@@ -56,21 +57,11 @@ namespace Gp.Data.Sql
 
                     _uowTransaction.Dispose();
                     _unitOfWork.Dispose();
-                    // TODO: dispose managed state (managed objects).
                 }
-
-                // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
-                // TODO: set large fields to null.
 
                 disposedValue = true;
             }
         }
-
-        // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
-        // ~SqlUnitOfWork() {
-        //   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
-        //   Dispose(false);
-        // }
 
         // This code added to correctly implement the disposable pattern.
         public void Dispose()
