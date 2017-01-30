@@ -41,5 +41,23 @@ namespace GpCore.Tests.Integrated.SqlRepositories
             Assert.Equal("plum tomatoes", savedVariety.Name);
         }
 
+        [Fact]
+        public void UpdateVarietyWithNewName()
+        {
+            Variety newVariety = new Variety(EntityId.ForNewEntity(), "plum tomatoes");
+
+            repo.Save(newVariety);
+
+            Variety savedVariety = repo.Get(newVariety.Id);
+
+            savedVariety.Rename("heirloom plum tomatoes");
+
+            repo.Save(savedVariety);
+
+            savedVariety = repo.Get(newVariety.Id);
+
+            Assert.Equal("heirloom plum tomatoes", savedVariety.Name);
+        }
+
     }
 }

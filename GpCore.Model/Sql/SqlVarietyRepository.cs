@@ -48,14 +48,23 @@ namespace GpCore.Model.Sql
         {
             SqlCommand cmd = _unitOfWork.CreateCommand();
 
-            cmd.CommandText = "insert into dbo.Varieties(VarietyId, Name, CreateDate) values(@VarietyId, @Name, @CreateDate)";
-            cmd.Parameters.AddWithValue("@VarietyId", variety.Id.Id);
-            cmd.Parameters.AddWithValue("@Name", variety.Name);
-            cmd.Parameters.AddWithValue("@CreateDate", variety.Id.CreateDate);
+            if (variety.IsNew)
+            {
+                cmd.CommandText = "insert into dbo.Varieties(VarietyId, Name, CreateDate) values(@VarietyId, @Name, @CreateDate)";
+                cmd.Parameters.AddWithValue("@VarietyId", variety.Id.Id);
+                cmd.Parameters.AddWithValue("@Name", variety.Name);
+                cmd.Parameters.AddWithValue("@CreateDate", variety.CreateDate);
+            }
+            else
+            {
+                cmd.CommandText = "update dbo.Varieties Set Name = @Name Where VarietyId = @VarietyId";
+                cmd.Parameters.AddWithValue("@VarietyId", variety.Id.Id);
+                cmd.Parameters.AddWithValue("@Name", variety.Name);
+            }
 
             cmd.ExecuteNonQuery();
 
-            variety.Id.AcceptChanges();
+            variety.AcceptChanges();
         }
     }
 }

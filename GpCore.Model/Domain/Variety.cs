@@ -14,6 +14,10 @@ namespace GpCore.Model.Domain
             Name = name;
         }
         public string Name { get; private set; }
-        
+
+        public void Rename(string newName)
+        {
+            Name = newName;
+        }
     }
 }

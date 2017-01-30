@@ -14,5 +14,26 @@ namespace GpCore.Model.Common
 
         public EntityId Id { get; private set; }
 
+        public bool IsNew
+        {
+            get
+            {
+                return Id.IsNew;
+            }
+        }
+
+        public DateTime CreateDate
+        {
+            get
+            {
+                return Id.CreateDate;
+            }
+        }
+
+        public void AcceptChanges()
+        {
+            Id.AcceptChanges();
+        }
+
     }
 }
