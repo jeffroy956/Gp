@@ -9,30 +9,30 @@ namespace GpCore.Model.Common
     {
         public Entity(EntityId id)
         {
-            Id = id;
+            _id = id;
         }
 
-        public EntityId Id { get; private set; }
+        private EntityId _id;
+
+        public Guid Id
+        {
+            get
+            {
+                return Id;
+            }
+        }
 
         public bool IsNew
         {
             get
             {
-                return Id.IsNew;
+                return _id.IsNew;
             }
         }
-
-        public DateTime CreateDate
-        {
-            get
-            {
-                return Id.CreateDate;
-            }
-        }
-
+        
         public void AcceptChanges()
         {
-            Id.AcceptChanges();
+            _id.AcceptChanges();
         }
 
     }

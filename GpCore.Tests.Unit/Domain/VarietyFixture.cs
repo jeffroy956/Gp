@@ -15,7 +15,7 @@ namespace GpCore.Tests.Unit.Domain
         {
             Variety variety = new Variety(EntityId.ForNewEntity(), "Greens");
 
-            Assert.True(variety.Id.IsNew);
+            Assert.True(variety.IsNew);
             Assert.Equal("Greens", variety.Name);
         }
 

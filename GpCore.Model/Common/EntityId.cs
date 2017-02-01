@@ -7,20 +7,18 @@ namespace GpCore.Model.Common
 {
     public class EntityId
     {
-        private EntityId(Guid id, DateTime createDate)
+        private EntityId(Guid id)
         {
             Id = id;
-            CreateDate = createDate;
         }
 
         public Guid Id { get; private set; }
-        public DateTime CreateDate { get; private set; }
 
         public bool IsNew { get; private set; }
 
         public static EntityId ForNewEntity()
         {
-            return new EntityId(Guid.NewGuid(), DateTime.UtcNow)
+            return new EntityId(Guid.NewGuid())
             {
                 IsNew = true
             };
@@ -31,9 +29,9 @@ namespace GpCore.Model.Common
             IsNew = false;
         }
 
-        public static EntityId ForExistingEntity(Guid guid, DateTime utcNow)
+        public static EntityId ForExistingEntity(Guid guid)
         {
-            return new EntityId(guid, utcNow);
+            return new EntityId(guid);
         }
     }
 }

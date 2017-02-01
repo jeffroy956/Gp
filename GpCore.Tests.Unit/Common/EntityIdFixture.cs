@@ -19,15 +19,6 @@ namespace GpCore.Tests.Unit.Common
         }
 
         [Fact]
-        public void CreateNewIdSetsCreationTimeStamp()
-        {
-            EntityId id = EntityId.ForNewEntity();
-
-            Assert.NotEqual(DateTime.MinValue, id.CreateDate);
-            Assert.Equal(DateTimeKind.Utc, id.CreateDate.Kind);
-        }
-
-        [Fact]
         public void CreateNewIdSetsIsNewFlag()
         {
             EntityId id = EntityId.ForNewEntity();
@@ -48,11 +39,10 @@ namespace GpCore.Tests.Unit.Common
         [Fact]
         public void CreateEntityIdForExistingEntity()
         {
-            EntityId id = EntityId.ForExistingEntity(Guid.NewGuid(), DateTime.UtcNow);
+            EntityId id = EntityId.ForExistingEntity(Guid.NewGuid());
 
             Assert.NotNull(id);
             Assert.NotEqual(Guid.Empty, id.Id);
-            Assert.NotEqual(DateTime.MinValue, id.CreateDate);
         }
     }
 }

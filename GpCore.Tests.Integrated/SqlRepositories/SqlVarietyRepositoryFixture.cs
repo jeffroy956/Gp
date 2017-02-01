@@ -25,39 +25,39 @@ namespace GpCore.Tests.Integrated.SqlRepositories
 
             repo.Save(newVariety);
 
-            Assert.False(newVariety.Id.IsNew);
+            Assert.False(newVariety.IsNew);
         }
 
-        [Fact]
-        public void GetVarietyAfterSaving()
-        {
-            Variety newVariety = new Variety(EntityId.ForNewEntity(), "plum tomatoes");
+        //[Fact]
+        //public void GetVarietyAfterSaving()
+        //{
+        //    Variety newVariety = new Variety(EntityId.ForNewEntity(), "plum tomatoes");
 
-            repo.Save(newVariety);
+        //    repo.Save(newVariety);
 
-            Variety savedVariety = repo.Get(newVariety.Id);
+        //    Variety savedVariety = repo.Get(newVariety.Id);
 
-            Assert.NotNull(savedVariety);
-            Assert.Equal("plum tomatoes", savedVariety.Name);
-        }
+        //    Assert.NotNull(savedVariety);
+        //    Assert.Equal("plum tomatoes", savedVariety.Name);
+        //}
 
-        [Fact]
-        public void UpdateVarietyWithNewName()
-        {
-            Variety newVariety = new Variety(EntityId.ForNewEntity(), "plum tomatoes");
+        //[Fact]
+        //public void UpdateVarietyWithNewName()
+        //{
+        //    Variety newVariety = new Variety(EntityId.ForNewEntity(), "plum tomatoes");
 
-            repo.Save(newVariety);
+        //    repo.Save(newVariety);
 
-            Variety savedVariety = repo.Get(newVariety.Id);
+        //    Variety savedVariety = repo.Get(newVariety.Id);
 
-            savedVariety.Rename("heirloom plum tomatoes");
+        //    savedVariety.Rename("heirloom plum tomatoes");
 
-            repo.Save(savedVariety);
+        //    repo.Save(savedVariety);
 
-            savedVariety = repo.Get(newVariety.Id);
+        //    savedVariety = repo.Get(newVariety.Id);
 
-            Assert.Equal("heirloom plum tomatoes", savedVariety.Name);
-        }
+        //    Assert.Equal("heirloom plum tomatoes", savedVariety.Name);
+        //}
 
     }
 }

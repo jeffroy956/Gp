@@ -19,12 +19,12 @@ namespace GpCore.Model.Sql
             _unitOfWork = unitOfWork;
         }
 
-        public Variety Get(EntityId id)
+        public Variety Get(Guid id)
         {
             Variety variety = null;
             SqlCommand cmd = _unitOfWork.CreateCommand();
             cmd.CommandText = "Select VarietyId, Name, CreateDate From dbo.Varieties Where VarietyId = @VarietyId";
-            cmd.Parameters.AddWithValue("@VarietyId", id.Id);
+            cmd.Parameters.AddWithValue("@VarietyId", id);
 
             using (SqlDataReader infoReader = cmd.ExecuteReader())
             {
@@ -35,8 +35,7 @@ namespace GpCore.Model.Sql
                     int idxCreateDate = infoReader.GetOrdinal("CreateDate");
 
                     variety = new Variety(
-                        EntityId.ForExistingEntity(infoReader.GetGuid(idxVarietyId),
-                        infoReader.GetDateTimeOffset(idxCreateDate).DateTime),
+                        EntityId.ForExistingEntity(infoReader.GetGuid(idxVarietyId)),
                         infoReader.GetString(idxName));
                 }
             }
@@ -51,14 +50,14 @@ namespace GpCore.Model.Sql
             if (variety.IsNew)
             {
                 cmd.CommandText = "insert into dbo.Varieties(VarietyId, Name, CreateDate) values(@VarietyId, @Name, @CreateDate)";
-                cmd.Parameters.AddWithValue("@VarietyId", variety.Id.Id);
+                cmd.Parameters.AddWithValue("@VarietyId", variety.Id);
                 cmd.Parameters.AddWithValue("@Name", variety.Name);
-                cmd.Parameters.AddWithValue("@CreateDate", variety.CreateDate);
+                cmd.Parameters.AddWithValue("@CreateDate", DateTime.UtcNow);
             }
             else
             {
                 cmd.CommandText = "update dbo.Varieties Set Name = @Name Where VarietyId = @VarietyId";
-                cmd.Parameters.AddWithValue("@VarietyId", variety.Id.Id);
+                cmd.Parameters.AddWithValue("@VarietyId", variety.Id);
                 cmd.Parameters.AddWithValue("@Name", variety.Name);
             }
 

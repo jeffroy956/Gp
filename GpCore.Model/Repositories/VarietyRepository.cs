@@ -9,7 +9,7 @@ namespace GpCore.Model.Repositories
 {
     public interface VarietyRepository
     {
-        Variety Get(EntityId id);
+        Variety Get(Guid id);
 
         void Save(Variety variety);
     }
