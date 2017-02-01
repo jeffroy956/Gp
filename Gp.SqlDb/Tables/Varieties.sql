@@ -2,5 +2,6 @@
 (
 	[VarietyId] uniqueidentifier NOT NULL PRIMARY KEY, 
     [Name] NVARCHAR(50) NOT NULL, 
-	[CreateDate] DATETIMEOFFSET NOT NULL
+	[CreateDate] DATETIMEOFFSET NOT NULL,
+	[LastModifiedDate] DATETIMEOFFSET NULL
 )

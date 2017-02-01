@@ -24,6 +24,20 @@ namespace GpCore.Model.Common
             }
         }
 
+        public TimeStamp TimeStamp
+        {
+            get
+            {
+                return _timeStamp;
+            }
+        }
+
+        public void UpdateTimeStamp()
+        {
+            _timeStamp.Update();
+        }
+
+
         public bool IsNew
         {
             get

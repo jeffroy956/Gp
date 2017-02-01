@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -65,6 +66,16 @@ namespace GpCore.Model.Common
             }
 
             return r.GetDateTime(ordinal);
+        }
+
+        public static DateTime? GetSafeDateTimeOffset(this SqlDataReader r, int ordinal)
+        {
+            if (r.IsDBNull(ordinal))
+            {
+                return null;
+            }
+
+            return r.GetDateTimeOffset(ordinal).DateTime;
         }
 
         public static object GetDbParamValue(object value)

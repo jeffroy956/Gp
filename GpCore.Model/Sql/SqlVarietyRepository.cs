@@ -23,7 +23,7 @@ namespace GpCore.Model.Sql
         {
             Variety variety = null;
             SqlCommand cmd = _unitOfWork.CreateCommand();
-            cmd.CommandText = "Select VarietyId, Name, CreateDate From dbo.Varieties Where VarietyId = @VarietyId";
+            cmd.CommandText = "Select VarietyId, Name, CreateDate, LastModifiedDate From dbo.Varieties Where VarietyId = @VarietyId";
             cmd.Parameters.AddWithValue("@VarietyId", id);
 
             using (SqlDataReader infoReader = cmd.ExecuteReader())
@@ -33,10 +33,12 @@ namespace GpCore.Model.Sql
                     int idxVarietyId = infoReader.GetOrdinal("VarietyId");
                     int idxName = infoReader.GetOrdinal("Name");
                     int idxCreateDate = infoReader.GetOrdinal("CreateDate");
+                    int idxLastModifiedDate = infoReader.GetOrdinal("LastModifiedDate");
 
                     variety = new Variety(
                         EntityId.ForExistingEntity(infoReader.GetGuid(idxVarietyId)),
-                        new TimeStamp(infoReader.GetDateTimeOffset(idxCreateDate).DateTime, null),
+                        new TimeStamp(infoReader.GetDateTimeOffset(idxCreateDate).DateTime,
+                        infoReader.GetSafeDateTimeOffset(idxLastModifiedDate)),
                         infoReader.GetString(idxName));
                 }
             }
@@ -57,9 +59,13 @@ namespace GpCore.Model.Sql
             }
             else
             {
-                cmd.CommandText = "update dbo.Varieties Set Name = @Name Where VarietyId = @VarietyId";
+                cmd.CommandText = "update dbo.Varieties Set Name = @Name, LastModifiedDate = @LastModifiedDate Where VarietyId = @VarietyId";
                 cmd.Parameters.AddWithValue("@VarietyId", variety.Id);
                 cmd.Parameters.AddWithValue("@Name", variety.Name);
+
+                variety.UpdateTimeStamp();
+
+                cmd.Parameters.AddWithValue("@LastModifiedDate", variety.TimeStamp.LastModifiedDate);
             }
 
             cmd.ExecuteNonQuery();

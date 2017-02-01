@@ -9,11 +9,11 @@ using Xunit;
 
 namespace GpCore.Tests.Integrated.SqlRepositories
 {
-    public class SqlVarietyRepositoryFixture: BaseSqlRepositoryFixture
+    public class SqlVarietyRepositoryFixture : BaseSqlRepositoryFixture
     {
 
         private SqlVarietyRepository repo;
-        public SqlVarietyRepositoryFixture(): base()
+        public SqlVarietyRepositoryFixture() : base()
         {
             repo = new SqlVarietyRepository(UnitOfWork);
         }
@@ -57,6 +57,7 @@ namespace GpCore.Tests.Integrated.SqlRepositories
             savedVariety = repo.Get(newVariety.Id);
 
             Assert.Equal("heirloom plum tomatoes", savedVariety.Name);
+            Assert.NotNull(savedVariety.TimeStamp.LastModifiedDate);
         }
 
     }

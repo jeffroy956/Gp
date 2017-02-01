@@ -24,5 +24,6 @@ namespace GpCore.Model.Domain
         {
             Name = newName;
         }
+
     }
 }
