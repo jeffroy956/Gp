@@ -13,7 +13,7 @@ namespace GpCore.Tests.Unit.Domain
         [Fact]
         public void CreateNewVarietyThatIsNotYetPersisted()
         {
-            Variety variety = new Variety(EntityId.ForNewEntity(), "Greens");
+            Variety variety = new Variety("Greens");
 
             Assert.True(variety.IsNew);
             Assert.Equal("Greens", variety.Name);

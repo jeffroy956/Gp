@@ -7,18 +7,20 @@ namespace GpCore.Model.Common
 {
     public class Entity
     {
-        public Entity(EntityId id)
+        public Entity(EntityId id, TimeStamp timeStamp)
         {
             _id = id;
+            _timeStamp = timeStamp;
         }
 
         private EntityId _id;
+        private TimeStamp _timeStamp;
 
         public Guid Id
         {
             get
             {
-                return Id;
+                return _id.Id;
             }
         }
 

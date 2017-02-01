@@ -36,6 +36,7 @@ namespace GpCore.Model.Sql
 
                     variety = new Variety(
                         EntityId.ForExistingEntity(infoReader.GetGuid(idxVarietyId)),
+                        new TimeStamp(infoReader.GetDateTimeOffset(idxCreateDate).DateTime, null),
                         infoReader.GetString(idxName));
                 }
             }

@@ -9,7 +9,12 @@ namespace GpCore.Model.Domain
 {
     public class Variety : Entity
     {
-        public Variety(EntityId id, string name): base(id)
+
+        public Variety(string name): this(EntityId.ForNewEntity(), TimeStamp.ForNewRecord(), name)
+        {
+
+        }
+        public Variety(EntityId id, TimeStamp timeStamp, string name): base(id, timeStamp)
         {
             Name = name;
         }
