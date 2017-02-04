@@ -67,11 +67,8 @@
     <Build Include="Tables\tblFamilies.sql" />
     <Build Include="Tables\tblCompanions.sql" />
     <Build Include="Tables\tblEnemies.sql" />
-    <Build Include="Tables\tblPlan.sql" />
     <Build Include="Tables\Varieties.sql" />
     <Build Include="Tables\tblCalendar.sql" />
-    <Build Include="Indexes\tblPlan_Variety.sql" />
-    <Build Include="Indexes\tblPlan_CalendarYear.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Gp.SqlDb.refactorlog" />
